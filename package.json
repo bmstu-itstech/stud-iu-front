@@ -6,7 +6,11 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "npm run lint:eslint && npm run lint:stylelint && npm run lint:prettier",
+    "lint:eslint": "eslint . --fix",
+    "lint:stylelint": "stylelint '**/*.{css,scss}' --fix",
+    "lint:prettier": "prettier --write ."
   },
   "dependencies": {
     "next": "15.3.5",
@@ -22,6 +26,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
     "prettier": "3.6.2",
     "stylelint": "^16.23.1",
     "stylelint-config-standard": "^39.0.0",
