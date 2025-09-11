@@ -24,6 +24,14 @@ export default [
     'plugin:import/warnings',
     'prettier',
   ),
+  ...compat.config({
+    extends: [],
+    rules: {
+      "@typescript-eslint/no-empty-object-type": {
+        "allowObjectTypes": 'always'
+      }
+    }
+  }),
 
   {
     rules: {
