@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "npm run lint:eslint && npm run lint:stylelint && npm run lint:prettier",
+    "lint:fix": "bun run lint:eslint && bun run lint:stylelint && bun run lint:prettier",
     "lint:eslint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "lint:stylelint": "stylelint '**/*.{css,scss}' --fix",
     "lint:prettier": "prettier --write ."
