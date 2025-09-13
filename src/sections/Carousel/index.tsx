@@ -9,7 +9,7 @@ const Carousel: FC<Props> = (props) => {
   return (
     <section
       id="carousel"
-      className='relative w-full h-[calc(100dvh-(6.25rem*2))] flex justify-center select-none'
+      className='relative w-full h-[calc(100dvh-(6.25rem*1.5))] flex justify-center select-none'
     >
       <Image
         src={props.coverUrl}

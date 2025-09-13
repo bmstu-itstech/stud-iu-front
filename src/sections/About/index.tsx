@@ -13,7 +13,7 @@ const About: FC<{}> = () => {
         <div className="flex flex-col gap-8">
           <Title level={2}><span className="text-blue-primary">Студ_ИУ</span> - это мы.<br/>Наше время - действовать</Title>
           <Text level={4}>Мы - команда из 250 человек, развивающая айти-сообщество. Студсовет объединяет инициативных ребят, готовых создавать проекты и организовывать мероприятия</Text>
-          <Button variant='blue' size='full'><Text level={4}>Стать активистом</Text></Button>
+          <Button variant='blue' size='full' className="flex-none mt-auto"><Text level={4}>Стать активистом</Text></Button>
         </div>
         <Image
           src="/images/team.png"

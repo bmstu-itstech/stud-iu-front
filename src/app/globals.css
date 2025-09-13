@@ -42,10 +42,10 @@
 }
 
 @theme {
-  --text-wh3xl: calc(1.75rem*2);
-  --text-h3xl: calc(2rem*2);
-  --text-h4xl: calc(2.5rem*2);
-  --text-h8xl: calc(5.625rem*2);
+  --text-wh3xl: calc(1.75rem*1.5);
+  --text-h3xl: calc(2rem*1.5);
+  --text-h4xl: calc(2.5rem*1.5);
+  --text-h8xl: calc(5.625rem*1.5);
   --text-wh3xl--line-height: calc(2.25/1.75);
   --text-h3xl--line-height: calc(2.25/2);
   --text-h4xl--line-height: 1;

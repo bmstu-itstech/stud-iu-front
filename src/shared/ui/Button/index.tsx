@@ -31,7 +31,7 @@ const buttonVariants = cva(
         icon: "size-9",
         inline: "px-8 py-4 rounded-full",
         primary: 'px-8 py-4 sm:px-16 sm:py-8 rounded-full',
-        full: 'px-8 py-4 flex flex-1 rounded-full',
+        full: 'px-8 py-4 flex flex-1 rounded-full h-fit',
         inlineWithBorder: "px-8 py-4 rounded-full border-2 solid border-white",
       },
     },
