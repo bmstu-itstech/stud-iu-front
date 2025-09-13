@@ -1,8 +1,8 @@
-import About from "@/sections/About";
-import Additional from "@/sections/Additional";
-import Carousel from "@/sections/Carousel";
-import Events from "@/sections/Events";
-import News from "@/sections/News";
+import About from '@/sections/About';
+import Additional from '@/sections/Additional';
+import Carousel from '@/sections/Carousel';
+import Events from '@/sections/Events';
+import News from '@/sections/News';
 
 export default function Home() {
   return (

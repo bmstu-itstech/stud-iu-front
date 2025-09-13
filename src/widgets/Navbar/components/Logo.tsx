@@ -1,28 +1,14 @@
-import { HTMLAttributes, FC } from "react";
-import Image from "next/image";
+import Image from 'next/image';
+import { HTMLAttributes, FC } from 'react';
 
 type Props = HTMLAttributes<HTMLDivElement>;
 
-const Logo: FC<Props> = ({
-  onClick,
-  ...props
-}) => {
-
+const Logo: FC<Props> = ({ onClick, ...props }) => {
   return (
-    <div
-      className="flex cursor-pointer"
-      onClick={onClick}
-      {...props}
-    >
-      <Image
-        src="/icons/logo.svg"
-        width={180}
-        height={50}
-        alt="logo"
-      />
+    <div className="flex cursor-pointer" onClick={onClick} {...props}>
+      <Image src="/icons/logo.svg" width={180} height={50} alt="logo" />
     </div>
   );
-
 };
 
 export default Logo;

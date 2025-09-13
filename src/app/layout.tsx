@@ -1,8 +1,9 @@
-import { Metadata } from "next";
-import "./globals.css";
-import localFont from "next/font/local";
-import Navbar from "@/widgets/Navbar";
-import Footer from "@/widgets/Footer";
+import { Metadata } from 'next';
+import './globals.css';
+import localFont from 'next/font/local';
+
+import Footer from '@/widgets/Footer';
+import Navbar from '@/widgets/Navbar';
 
 export const alsSector = localFont({
   variable: '--font-als-sector',
@@ -11,35 +12,36 @@ export const alsSector = localFont({
     {
       path: '../../public/fonts/ALS_Sector-Regular.otf',
       weight: '400',
-      style: 'normal'
+      style: 'normal',
     },
     {
       path: '../../public/fonts/ALS_Sector-Bold.otf',
       weight: '600',
-      style: 'normal'
-    }
-  ]
+      style: 'normal',
+    },
+  ],
 });
 
 export const metadata: Metadata = {
   title: 'СтудИУ',
-  description: 'Официальный сайт Студенческого совета факультета ИУ МГТУ им. Н.Э. Баумана',
+  description:
+    'Официальный сайт Студенческого совета факультета ИУ МГТУ им. Н.Э. Баумана',
   applicationName: 'СтудИУ',
   referrer: 'same-origin',
   keywords: ['МГТУ', 'Бауманка', 'ИУ', 'Студсовет ИУ', 'МГТУ ИУ'],
   authors: [
     {
       name: 'ITS Tech',
-      url: 'https://its-bmstu.ru'
-    }
+      url: 'https://its-bmstu.ru',
+    },
   ],
   creator: 'ITS Tech',
   publisher: 'ITS Tech',
   formatDetection: {
     email: true,
     address: false,
-    telephone: true
-  }
+    telephone: true,
+  },
 };
 
 export default function RootLayout({

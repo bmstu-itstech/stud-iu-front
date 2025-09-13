@@ -3,4 +3,4 @@ export interface CardProps {
   description: string;
   caption: string;
   href: string;
-};
+}
