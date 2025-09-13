@@ -1,10 +1,8 @@
 import { FC } from "react";
-import { CardProps } from "../cards";
 import { Text, Title } from "@/shared/ui/Typography";
 import Link from "next/link";
 import Button from "@/shared/ui/Button";
-
-type Props = CardProps;
+import { CardProps as Props } from "../cards.props";
 
 const Card: FC<Props> = (props) => {
   
