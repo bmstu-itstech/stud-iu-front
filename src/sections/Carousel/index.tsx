@@ -1,10 +1,8 @@
 import { FC } from "react";
-import { EventDTO } from "@/shared/dto";
+import { EventDTO as Props } from "@/shared/dto";
 import Image from "next/image";
 import { Text, Title } from "@/shared/ui/Typography";
 import Button from "@/shared/ui/Button";
-
-type Props = EventDTO;
 
 const Carousel: FC<Props> = (props) => {
 

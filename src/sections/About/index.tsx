@@ -3,7 +3,7 @@ import { Text, Title } from "@/shared/ui/Typography";
 import Image from "next/image";
 import { FC } from "react";
 import Card from "./components/Card";
-import cards from "./cards";
+import { cards } from "./cards.usecase";
 
 const About: FC<{}> = () => {
 

@@ -1,11 +1,6 @@
-export interface CardProps {
-  title: string;
-  description: string;
-  caption: string;
-  href: string;
-};
+import { CardProps } from "./cards.props";
 
-const cards: CardProps[] = [
+export const cards: CardProps[] = [
   {
     title: '250 человек',
     description: 'Стараются изо всех сил',
@@ -31,5 +26,3 @@ const cards: CardProps[] = [
     href: '/#'
   }
 ];
-
-export default cards;

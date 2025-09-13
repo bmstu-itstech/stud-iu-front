@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" className="overflow-x-hidden">
       <body
         className={`antialiased ${alsSector.className} bg-white max-w-full`}
       >

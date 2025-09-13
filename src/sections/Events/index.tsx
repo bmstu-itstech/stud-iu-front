@@ -1,5 +1,5 @@
 import { FC } from "react";
-import events from "./events";
+import events from "./events.usecase";
 import EventCard from "./components/EventCard";
 import Button from "@/shared/ui/Button";
 import { Text } from "@/shared/ui/Typography";
