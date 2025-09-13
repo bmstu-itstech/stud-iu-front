@@ -16,8 +16,8 @@ export const Caption: React.FC<CaptionProps> = ({
 }) => {
 
   const styles: Record<number, string> = {
-    1: "calc(var(--text-2xl)*1.5)",
-    2: "clamp(calc(var(--text-sm)*1.5), 5vw, calc(var(--text-xl)*1.5))" // text-sm -> text-xl
+    1: "calc(var(--text-2xl)*var(--dpr-ratio))",
+    2: "clamp(calc(var(--text-sm)*var(--dpr-ratio)), 5vw, calc(var(--text-xl)*var(--dpr-ratio)))" // text-sm -> text-xl
   };
 
   return (

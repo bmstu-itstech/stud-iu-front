@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  --dpr-ratio: 1.5;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -42,10 +46,10 @@
 }
 
 @theme {
-  --text-wh3xl: calc(1.75rem*1.5);
-  --text-h3xl: calc(2rem*1.5);
-  --text-h4xl: calc(2.5rem*1.5);
-  --text-h8xl: calc(5.625rem*1.5);
+  --text-wh3xl: calc(1.75rem*var(--dpr-ratio));
+  --text-h3xl: calc(2rem*var(--dpr-ratio));
+  --text-h4xl: calc(2.5rem*var(--dpr-ratio));
+  --text-h8xl: calc(5.625rem*var(--dpr-ratio));
   --text-wh3xl--line-height: calc(2.25/1.75);
   --text-h3xl--line-height: calc(2.25/2);
   --text-h4xl--line-height: 1;
