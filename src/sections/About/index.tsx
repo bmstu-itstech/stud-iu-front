@@ -25,7 +25,7 @@ const About: FC<{}> = () => {
             объединяет инициативных ребят, готовых создавать проекты и
             организовывать мероприятия
           </Text>
-          <Button variant="blue" size="full">
+          <Button variant="blue" size="full" className="max-h-25">
             <Text level={4}>Стать активистом</Text>
           </Button>
         </div>
