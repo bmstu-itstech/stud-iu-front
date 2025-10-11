@@ -27,15 +27,28 @@ const Carousel: FC<Props> = (props) => {
       <div className="absolute inset-0 w-full z-2 bg-linear-180 from-black/0 via-black/0 to-blue-primary" />
       <div className="flex flex-col flex-1 max-w-primary px-3 2xl:px-0 py-10 sm:py-18 gap-4 sm:gap-10 z-10">
         {props.details && (
-          <div className='flex justify-between'>
-            {props.details.map(detail => <Text className='text-white/70' key={detail}>{detail}</Text>)}
+          <div className="flex justify-between">
+            {props.details.map((detail) => (
+              <Text className="text-white/70" key={detail}>
+                {detail}
+              </Text>
+            ))}
           </div>
         )}
-        <div className='flex gap-8 items-center'>
+        <div className="flex gap-8 items-center">
           <Title className="text-white">{props.title}</Title>
-          {props.status && <div className={`${props.status === 'Завершено' ? 'bg-green-600' : 'bg-blue-primary'} rounded-2xl px-8 py-2 h-fit`}>
-            <Text level={4} className='!text-4xl !font-medium text-white'>{props.status}</Text>
-          </div>}
+          {props.status && (
+            <div
+              className={`${props.status === 'Завершено' ? 'bg-[#bbff3a]' : 'bg-blue-primary'} rounded-2xl px-8 py-4 h-fit`}
+            >
+              <Text
+                level={4}
+                className={`!text-4xl !font-medium ${props.status === 'Завершено' ? 'text-black' : 'text-white'}`}
+              >
+                {props.status}
+              </Text>
+            </div>
+          )}
         </div>
         <Text level={2} className="text-white/80">
           {props.description}

@@ -6,7 +6,7 @@ export interface LinkProps {
 const links: LinkProps[] = [
   { label: 'О нас', href: '/#about' },
   { label: 'Новости', href: '/#news' },
-  { label: 'Мероприятия', href: '/#events' },
+  { label: 'Мероприятия', href: '/events' },
   { label: 'Контакты', href: '/#contacts' },
 ];
 

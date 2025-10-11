@@ -17,10 +17,11 @@ export default function Home() {
         date={new Date('2025-09-01')}
         fillColor="blue"
         caption=""
-        before={(
-        <Button variant="white" size="primary">
-          <Title level={5}>Зарегистрироваться</Title>
-        </Button>)}
+        before={
+          <Button variant="white" size="primary">
+            <Title level={5}>Зарегистрироваться</Title>
+          </Button>
+        }
       />
       <About />
       <News />

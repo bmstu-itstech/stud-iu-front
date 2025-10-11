@@ -4,11 +4,53 @@ import { FC } from 'react';
 import { EventDTO } from '@/shared/dto';
 import { Caption, Title } from '@/shared/ui/Typography';
 
-type Props = EventDTO;
+type Props = EventDTO & {
+  mode?: 'full' | 'compact' | 'minified';
+};
 
 const EventCard: FC<Props> = (props) => {
+  if (props.mode === 'compact') {
+    return (
+      <div
+        className="rounded-3xl overflow-hidden max-w-220 h-max flex cursor-pointer select-none"
+        style={{ backgroundColor: props.fillColor }}
+      >
+        <div className="flex flex-col gap-4 text-white p-6">
+          <Title level={4}>{props.title}</Title>
+          <Caption level={1}>{props.caption}</Caption>
+        </div>
+        <Image
+          width={460}
+          height={220}
+          alt="event cover"
+          src={props.coverUrl}
+          className="rounded-3xl object-cover max-w-100"
+        />
+      </div>
+    );
+  }
+
+  if (props.mode === 'minified') {
+    return (
+      <div className="rounded-3xl bg-white overflow-hidden max-w-173 max-sm:max-w-full cursor-pointer select-none">
+        <Image
+          src={props.coverUrl}
+          width={460}
+          height={220}
+          className="object-cover w-full z-10 h-110"
+          alt="event cover"
+        />
+        <div className="text-center pt-3 flex justify-center items-center">
+          <Title level={4} className="!text-[3rem]">
+            {props.title}
+          </Title>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="rounded-3xl bg-white overflow-hidden max-w-220 relative">
+    <div className="rounded-3xl bg-white overflow-hidden max-w-220 relative cursor-pointer select-none">
       <Image
         src={props.coverUrl}
         width={460}
