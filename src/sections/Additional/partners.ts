@@ -1,4 +1,4 @@
-export default [
+const partners = [
   '/images/kirzhikh.jpeg',
   '/images/kirzhikh.jpeg',
   '/images/kirzhikh.jpeg',
@@ -6,3 +6,5 @@ export default [
   '/images/kirzhikh.jpeg',
   '/images/kirzhikh.jpeg',
 ];
+
+export default partners;

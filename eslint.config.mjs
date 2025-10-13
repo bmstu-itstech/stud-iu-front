@@ -39,6 +39,7 @@ export default [
     'plugin:import/errors',
     'plugin:import/warnings',
     'prettier',
+    'plugin:@next/next/recommended',
   ),
 
   // Основная конфигурация для JavaScript/TypeScript файлов
