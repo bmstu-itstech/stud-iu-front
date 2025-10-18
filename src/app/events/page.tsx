@@ -1,17 +1,24 @@
+'use client';
 import EventCard from '@/sections/Events/components/EventCard';
 import events from '@/sections/Events/events.usecase';
 import { Text, Title } from '@/shared/ui/Typography';
+import { useHorizontalScroll } from '@/shared/utils';
 
 export default function Events() {
+  const scrollRef = useHorizontalScroll();
+
   return (
     <>
       <section className="flex flex-1 max-sm:flex-col gap-30 w-dvw mx-auto px-6 2xl:px-0 max-w-primary pb-24">
         <div className="flex flex-col gap-4 max-w-250">
-          <Title level={2}>Будущие мероприятия</Title>
+          <Title level={2} className="leading-none">
+            Будущие мероприятия
+          </Title>
           <Text level={2}>Регистрируйтесь на наши новые мероприятия</Text>
         </div>
 
         <div
+          ref={scrollRef}
           className="
             flex
             items-center

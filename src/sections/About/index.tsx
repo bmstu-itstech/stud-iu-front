@@ -13,9 +13,9 @@ const About: FC<{}> = () => {
       id="about"
       className="flex flex-1 gap-16 flex-col w-dvw mx-auto mt-24 sm:mt-48 px-6 2xl:px-0 max-w-primary"
     >
-      <div className="flex flex-col lg:flex-row gap-10">
+      <div className="flex flex-col lg:flex-row gap-10 justify-between">
         <div className="flex flex-col gap-8">
-          <Title level={2}>
+          <Title level={2} className="leading-none">
             <span className="text-blue-primary">Студ_ИУ</span> - это мы.
             <br />
             Наше время - действовать
@@ -25,13 +25,13 @@ const About: FC<{}> = () => {
             объединяет инициативных ребят, готовых создавать проекты и
             организовывать мероприятия
           </Text>
-          <Button variant="blue" size="full" className="max-h-25">
+          <Button variant="blue" size="full" className="max-h-25 mt-auto">
             <Text level={4}>Стать активистом</Text>
           </Button>
         </div>
         <Image
           src="/images/team.png"
-          className="rounded-lg mx-auto lg:mx-0 object-contain xl:object-cover"
+          className="rounded-lg mx-auto lg:mx-0 object-contain xl:object-cover h-fit"
           width={542}
           height={402}
           alt="team"

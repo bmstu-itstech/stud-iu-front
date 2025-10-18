@@ -19,11 +19,11 @@ export const Title: React.FC<TitleProps> = ({
   const Tag = `h${level}` as HeadingTag;
 
   const styles: Record<number, string> = {
-    1: 'clamp(calc(var(--text-4xl)*2), 5vw, var(--text-h8xl))', // text-4xl -> text-h8xl
-    2: 'clamp(calc(var(--text-3xl)*2), 5vw, calc(var(--text-6xl)*2))', // text-3xl -> text-6xl
-    3: 'clamp(calc(var(--text-3xl)*2), 5vw, calc(var(--text-5xl)*2))', // text-3xl -> text-5xl
-    4: 'clamp(calc(var(--text-xl)*2), 5vw, var(--text-h4xl))', // text-xl -> text-h4xl
-    5: 'clamp(calc(var(--text-xl)*2), 5vw, calc(var(--text-4xl)*2))', // text-xl -> text-4xl
+    1: 'clamp(calc(var(--text-4xl)*var(--dpr-ratio)), 5vw, var(--text-h8xl))', // text-4xl -> text-h8xl
+    2: 'clamp(calc(var(--text-3xl)*var(--dpr-ratio)), 5vw, calc(var(--text-6xl)*var(--dpr-ratio)))', // text-3xl -> text-6xl
+    3: 'clamp(calc(var(--text-3xl)*var(--dpr-ratio)), 5vw, calc(var(--text-5xl)*var(--dpr-ratio)))', // text-3xl -> text-5xl
+    4: 'clamp(calc(var(--text-xl)*var(--dpr-ratio)), 5vw, var(--text-h4xl))', // text-xl -> text-h4xl
+    5: 'clamp(calc(var(--text-xl)*var(--dpr-ratio)), 5vw, calc(var(--text-4xl)*var(--dpr-ratio)))', // text-xl -> text-4xl
     6: 'text-2xl',
   };
 

@@ -16,7 +16,7 @@ const Additional: FC<{}> = () => {
       <div className="flex flex-col mx-auto max-w-full sm:max-w-primary gap-16">
         <Title
           level={1}
-          className="sm:![calc(var(--text-7xl*2))] text-white text-center"
+          className="sm:![calc(var(--text-7xl*(--dpr-ratio)))] text-white text-center"
         >
           Наши партнёры
         </Title>

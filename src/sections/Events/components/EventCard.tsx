@@ -24,7 +24,7 @@ const EventCard: FC<Props> = (props) => {
           height={220}
           alt="event cover"
           src={props.coverUrl}
-          className="rounded-3xl object-cover max-w-100"
+          className="rounded-3xl object-cover max-w-100 min-h-100"
         />
       </div>
     );
@@ -36,12 +36,12 @@ const EventCard: FC<Props> = (props) => {
         <Image
           src={props.coverUrl}
           width={460}
-          height={220}
+          height={240}
           className="object-cover w-full z-10 h-110"
           alt="event cover"
         />
-        <div className="text-center pt-3 flex justify-center items-center">
-          <Title level={4} className="!text-[3rem]">
+        <div className="text-center font-bold flex justify-center items-center">
+          <Title level={4} className="!text-[3.5rem]">
             {props.title}
           </Title>
         </div>

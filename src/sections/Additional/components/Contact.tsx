@@ -9,7 +9,7 @@ type Props = ContactProps;
 
 const Contact: FC<Props> = (props) => {
   return (
-    <div className="flex flex-col gap-4 max-w-[clamp(calc(12.5rem*2), 5vw, calc(18rem*2))] items-center">
+    <div className="flex flex-col gap-4 max-w-[clamp(calc(12.5rem*var(--dpr-ratio)), 5vw, calc(18rem*var(--dpr-ratio)))] items-center">
       <Image
         src={props.avatarUrl}
         alt="contact avatar"
