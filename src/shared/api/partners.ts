@@ -1,5 +1,5 @@
 import apiClient from './axios';
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { Partner, PartnerPayload, PaginatedResponse, PatchedPartner } from './types';
 
 const BASE_URL = '/partners';

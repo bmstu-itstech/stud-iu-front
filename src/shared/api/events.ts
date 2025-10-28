@@ -1,5 +1,5 @@
 import apiClient from './axios';
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { FutureEvent, PastEvent, PaginatedResponse, FutureEventPayload, PastEventPayload, PatchedFutureEvent, PatchedPastEvent } from './types';
 
 interface ListParams {

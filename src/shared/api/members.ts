@@ -1,5 +1,5 @@
 import apiClient from './axios';
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { BoardMember, BoardMemberPayload, PaginatedResponse, PatchedBoardMember } from './types';
 
 const BASE_URL = '/board_members';

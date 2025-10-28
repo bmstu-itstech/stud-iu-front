@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 
 import apiClient from './axios';
 import { News, NewsPayload, PaginatedResponse, PatchedNews } from './types';
