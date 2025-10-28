@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 
 import Footer from '@/widgets/Footer';
 import Navbar from '@/widgets/Navbar';
+import { Providers } from './providers';
 
 export const alsSector = localFont({
   variable: '--font-als-sector',
@@ -44,6 +45,7 @@ export const metadata: Metadata = {
   },
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -54,9 +56,11 @@ export default function RootLayout({
       <body
         className={`antialiased ${alsSector.className} bg-white max-w-full`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <Providers>
+          <Navbar />
+            {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

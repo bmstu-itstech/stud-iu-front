@@ -1,12 +1,31 @@
-import { FC } from 'react';
+'use client';
+
+import { FC, useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+import { getNews, News as NewsType } from '@/shared/api';
 
 import Button from '@/shared/ui/Button';
 import { Text, Title } from '@/shared/ui/Typography';
-
 import NewsCard from './components/NewsCard';
-import news from './news';
 
 const News: FC<{}> = () => {
+  const {
+    data: news,
+    isLoading,
+    isError,
+  } = useQuery<NewsType[], Error>({
+    queryKey: ['newsList'],
+    queryFn: () => getNews({ limit: 3 }).then((res) => res.data.results),
+  });
+
+  const sortedNews = useMemo(() => {
+    if (!news) return [];
+    return news
+      .slice()
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  }, [news]);
+
   return (
     <section
       id="news"
@@ -20,11 +39,21 @@ const News: FC<{}> = () => {
             корм обожает Тимоша по субботам
           </Text>
         </div>
-        {news
-          .sort((a, b) => b.created.getTime() - a.created.getTime())
-          .map((newsItem) => (
-            <NewsCard {...newsItem} key={newsItem.id} />
-          ))}
+
+        {isLoading
+          ? 
+            Array.from({ length: 3 }).map((_, index) => (
+              <NewsCard key={index} loading />
+            ))
+          : isError
+          ? 
+            <div className="flex items-center justify-center flex-1">
+              <Text className="text-red-500">Не удалось загрузить новости.</Text>
+            </div>
+          : 
+            sortedNews.map((newsItem) => (
+              <NewsCard {...newsItem} key={newsItem.id} />
+            ))}
       </div>
       <Button variant="black" size="full">
         <Text level={4}>Смотреть все</Text>

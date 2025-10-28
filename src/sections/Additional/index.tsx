@@ -1,13 +1,25 @@
+'use client';
+
 import Image from 'next/image';
 import { FC } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+import { getPartners, Partner } from '@/shared/api';
 
 import { Title } from '@/shared/ui/Typography';
-
 import Contact from './components/Contact';
 import contacts from './contacts';
-import partners from './partners';
 
 const Additional: FC<{}> = () => {
+  const {
+    data: partners,
+    isLoading,
+    isError,
+  } = useQuery<Partner[], Error>({
+    queryKey: ['partnersList'],
+    queryFn: () => getPartners({ limit: 12 }).then((res) => res.data.results),
+  });
+
   return (
     <section
       id="additional"
@@ -22,18 +34,30 @@ const Additional: FC<{}> = () => {
         </Title>
         <div className="flex py-20">
           <div className="flex gap-6 w-dvw overflow-x-auto h-max sm:justify-center">
-            {partners.map((partner, index) => (
-              <Image
-                width={80}
-                height={80}
-                src={partner}
-                key={index}
-                alt="partner logo"
-                className="w-40 h-40"
-              />
-            ))}
+            {isLoading ? (
+              Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="w-40 h-40 bg-gray-700 rounded-lg animate-pulse flex-shrink-0"
+                />
+              ))
+            ) : isError ? (
+              <p className="text-red-400 mx-auto">Не удалось загрузить партнёров.</p>
+            ) : (
+              partners?.map((partner) => (
+                <Image
+                  width={80}
+                  height={80}
+                  src={partner.image}
+                  key={partner.id}
+                  alt={partner.name}
+                  className="w-40 h-40 object-contain flex-shrink-0"
+                />
+              ))
+            )}
           </div>
         </div>
+        
         <Title
           id="contacts"
           level={1}
