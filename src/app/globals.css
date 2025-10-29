@@ -42,12 +42,12 @@
 }
 
 @theme {
-  --text-wh3xl: calc(1.75rem * 2);
-  --text-h3xl: calc(2rem * 2);
-  --text-h4xl: calc(2.5rem * 2);
-  --text-h8xl: calc(5.625rem * 2);
-  --text-wh3xl--line-height: calc(2.25 / 1.75);
-  --text-h3xl--line-height: calc(2.25 / 2);
+  --text-wh3xl: calc(1.75rem*var(--dpr-ratio));
+  --text-h3xl: calc(2rem*var(--dpr-ratio));
+  --text-h4xl: calc(2.5rem*var(--dpr-ratio));
+  --text-h8xl: calc(5.625rem*var(--dpr-ratio));
+  --text-wh3xl--line-height: calc(2.25/1.75);
+  --text-h3xl--line-height: calc(2.25/2);
   --text-h4xl--line-height: 1;
   --text-h8xl--line-height: 1;
   --color-brown-700: #533333;
@@ -60,6 +60,7 @@
 }
 
 :root {
+  --dpr-ratio: 1.5;
   --radius: 0.625rem;
   --background: oklch(100% 0 0deg);
   --foreground: oklch(14.5% 0 0deg);
@@ -158,4 +159,8 @@ html {
   html {
     font-size: clamp(0.2rem, 1.2vw + 0.1rem, 1.2rem);
   }
+}
+
+.scrolling-active {
+  scroll-snap-type: none;
 }

@@ -21,7 +21,7 @@ const buttonVariants = cva(
           'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
         link: 'text-primary underline-offset-4 hover:underline',
         black:
-          'bg-black text-white hover:bg-black/75 transition-colors duration-300 ease-in-out cursor-pointer gap-4',
+          'bg-black text-white hover:brightness-85 transition-all duration-300 ease-in-out cursor-pointer gap-4',
         white:
           'bg-white text-black hover:bg-white/90 transition-colors duration-300 ease-in-out cursor-pointer',
         blue: 'bg-blue-primary text-white text-center hover:bg-blue-primary/90 transition-colors duration-300 ease-in-out cursor-pointer gap-4',
@@ -31,10 +31,11 @@ const buttonVariants = cva(
         sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
         lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
         icon: 'size-9',
-        inline: 'px-8 py-4 rounded-full',
-        primary: 'px-8 py-4 sm:px-16 sm:py-8 rounded-full',
-        full: 'px-8 py-4 flex flex-1 rounded-full',
-        inlineWithBorder: 'px-8 py-4 rounded-full border-2 solid border-white',
+        inline: 'px-8 py-4 rounded-[3rem]',
+        primary: 'px-8 py-4 sm:px-16 sm:py-8 rounded-[3rem]',
+        full: 'px-8 py-4 flex flex-1 rounded-[3rem] h-fit',
+        inlineWithBorder:
+          'px-8 py-4 rounded-[3rem] border-2 solid border-white',
       },
     },
     defaultVariants: {
