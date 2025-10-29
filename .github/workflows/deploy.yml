@@ -24,8 +24,8 @@ jobs:
             fi
 
             # Полностью очищаем папку и создаем заново
-            sudo rm -rf ~/stud-iu/stud-iu-front
-            sudo mkdir -p ~/stud-iu/stud-iu-front
+            sudo rm -rf /home/tech/stud-iu/stud-iu-front
+            sudo mkdir -p /home/tech/stud-iu/stud-iu-front
             sudo chown -R tech:tech /home/tech/stud-iu/stud-iu-front
 
             # Переходим в папку и клонируем репозиторий
