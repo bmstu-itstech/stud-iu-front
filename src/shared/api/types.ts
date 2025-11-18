@@ -30,6 +30,7 @@ export interface FutureEvent {
   start_datetime: string;
   end_datetime?: string | null;
   registration_link?: string | null;
+  color: string;
 }
 
 export type FutureEventPayload = Omit<FutureEvent, 'id' | 'date_range' | 'images'> & {

@@ -6,8 +6,12 @@ import { getFutureEvents, FutureEvent } from '@/shared/api';
 import Button from '@/shared/ui/Button';
 import { Text } from '@/shared/ui/Typography';
 import EventCard from './components/EventCard';
+import { useRouter } from 'next/navigation';
 
 const Events: FC = () => {
+
+  const router = useRouter();
+
   const { data: events, isLoading, isError, error } = useQuery<FutureEvent[], Error>({
     queryKey: ['futureEvents'], 
     queryFn: async () => {
@@ -37,7 +41,7 @@ const Events: FC = () => {
           <div className="flex flex-wrap items-center justify-center lg:justify-between gap-10">
             {Array.from({ length: 9 }).map((_, index) => <EventCard key={index} loading />)}
           </div>
-          <Button variant="white" size="full">
+          <Button variant="white" size="full" onClick={() => router.push('/events')}>
             <Text level={4}>Все мероприятия</Text>
           </Button>
         </div>
@@ -66,7 +70,7 @@ const Events: FC = () => {
           </div>
         )}
 
-        <Button variant="white" size="full">
+        <Button variant="white" size="full" onClick={() => router.push('/events')}>
           <Text level={4}>Все мероприятия</Text>
         </Button>
       </div>
