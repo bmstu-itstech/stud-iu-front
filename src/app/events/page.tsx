@@ -76,7 +76,7 @@ export default function Events() {
               ? <Text className="text-gray-300">Не удалось загрузить мероприятия.</Text>
               : pastEvents?.map((event) => (
                   <div key={event.id} className="w-fit">
-                    <EventCard mode="minified" {...event} />
+                    <EventCard color="red" mode="minified" {...event} />
                   </div>
                 ))}
           </div>

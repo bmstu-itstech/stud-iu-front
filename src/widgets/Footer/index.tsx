@@ -46,6 +46,7 @@ const Footer: FC<{}> = () => {
                 alt="arrow right"
                 width={36}
                 height={36}
+                className="scale-75 md:scale-100"
               />
             </Button>
             <Button variant="black" size="inlineWithBorder">
@@ -55,6 +56,7 @@ const Footer: FC<{}> = () => {
                 alt="arrow right"
                 width={36}
                 height={36}
+                className="scale-75 md:scale-100"
               />
             </Button>
           </div>
