@@ -69,7 +69,7 @@ export default function CreateEventPage() {
             router.push('/admin/events');
         } catch (e: unknown) {
             console.error(e);
-            const errorMsg = e.response?.data?.error || 'Не удалось создать событие';
+            const errorMsg = (e as any).response?.data?.error || 'Не удалось создать событие';
             toast.error(errorMsg);
         } finally {
             setIsSubmitting(false);
