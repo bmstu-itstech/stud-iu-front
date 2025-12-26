@@ -31,6 +31,7 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./
 # Я знаю, что так делать нельзя, но Next вынуждает меня
 COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/scripts ./scripts
 
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
