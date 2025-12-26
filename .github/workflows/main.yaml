@@ -45,7 +45,7 @@ jobs:
   lint-check:
     name: Run Linters
     runs-on: ubuntu-latest
-    needs: ['install-cache']
+    needs: [ 'install-cache' ]
     steps:
       - name: Get the repository code
         uses: actions/checkout@v4
@@ -64,14 +64,8 @@ jobs:
             ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Run ESLint
-        run: npm run lint:eslint
-
-      - name: Run Prettier check
-        run: npm run lint:prettier
-
-      - name: Run Stylelint
-        run: npm run lint:stylelint
+      - name: Run Lint
+        run: npm run lint
 
   build:
     name: Build
