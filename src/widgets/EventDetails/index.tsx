@@ -3,9 +3,9 @@
 import type { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from 'next/image';
-import { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 
-import { PastEvent, FutureEvent } from '@/shared/api';
+import type { PastEvent, FutureEvent } from '@/shared/api';
 import { Text, Title } from '@/shared/ui/Typography';
 import { useDotButton } from '@/shared/utils/useDotButton';
 

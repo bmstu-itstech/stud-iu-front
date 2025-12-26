@@ -1,6 +1,6 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import apiClient from './axios';
-import { News, PaginatedResponse } from './types';
+import type { News, PaginatedResponse } from './types';
 
 const BASE_URL = '/news';
 

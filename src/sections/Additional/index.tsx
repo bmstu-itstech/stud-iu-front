@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { usePartners } from '@/shared/hooks/usePartners';
 
 import { Text, Title } from '@/shared/ui/Typography';

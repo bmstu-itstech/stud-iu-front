@@ -30,6 +30,7 @@ export const useDotButton = (emblaApi: EmblaApiType | undefined) => {
     useEffect(() => {
         if (!emblaApi) return;
 
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         onInit(emblaApi);
         onSelect(emblaApi);
 

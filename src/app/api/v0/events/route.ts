@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { saveFile } from '@/lib/upload';
-import { EventType, Precision } from '@prisma/client';
+import type { EventType, Precision } from '@prisma/client';
 import { ensureAdmin } from '@/lib/auth-check';
 
 export async function POST(req: NextRequest) {

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter, useParams } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 
-import { Title, Text } from '@/shared/ui/Typography';
+import { Title } from '@/shared/ui/Typography';
 import NewsCard from '@/sections/News/components/NewsCard';
 import apiClient from '@/shared/api/axios';
 
@@ -61,7 +61,7 @@ export default function EditNewsPage() {
             toast.success('Новость обновлена!');
             router.push('/admin/news');
             router.refresh();
-        } catch (e) {
+        } catch (e: unknown) {
             toast.error('Что-то пошло не так');
         } finally {
             setIsSubmitting(false);

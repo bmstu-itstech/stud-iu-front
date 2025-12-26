@@ -20,7 +20,7 @@ export const AdminActions = ({ id, basePath, apiPath }: AdminActionsProps) => {
             await apiClient.delete(`${apiPath}/${id}`);
             toast.success('Успешно удалено');
             router.refresh();
-        } catch (error) {
+        } catch {
             toast.error('Ошибка при удалении');
         }
     };

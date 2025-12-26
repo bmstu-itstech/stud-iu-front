@@ -4,7 +4,7 @@ import { useEventDetails } from '@/shared/hooks/useEvents';
 import { Text, Title } from '@/shared/ui/Typography';
 import Carousel, { CarouselSkeleton } from '@/widgets/EventDetails';
 import Button from '@/shared/ui/Button';
-import { FutureEvent } from '@/shared/api';
+import type { FutureEvent } from '@/shared/api';
 import { formatDate } from '@/shared/utils';
 
 const ErrorState = ({ message }: { message: string }) => (

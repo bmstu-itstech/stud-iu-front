@@ -1,6 +1,6 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import apiClient from './axios';
-import { Partner, PaginatedResponse } from './types';
+import type { Partner, PaginatedResponse } from './types';
 
 const BASE_URL = '/partners';
 

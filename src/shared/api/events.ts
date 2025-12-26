@@ -1,6 +1,6 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import apiClient from './axios';
-import {
+import type {
     FutureEvent,
     PastEvent,
     PaginatedResponse

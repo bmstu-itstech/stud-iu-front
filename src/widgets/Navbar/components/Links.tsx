@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import Link from 'next/link';
 import links from '../links';
 import { Caption } from '@/shared/ui/Typography';

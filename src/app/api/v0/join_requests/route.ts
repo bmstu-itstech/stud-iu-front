@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { ensureAdmin } from '@/lib/auth-check';
-import { RequestStatus } from '@prisma/client';
+import type { RequestStatus } from '@prisma/client';
 
 export async function GET(req: NextRequest) {
     if (!await ensureAdmin()) {

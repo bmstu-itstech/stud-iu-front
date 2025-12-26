@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import type { FC } from 'react';
 import { useFutureEvents } from '@/shared/hooks/useEvents';
 import Carousel, { CarouselSkeleton } from '../EventDetails';
 import { Text, Title } from '@/shared/ui/Typography';

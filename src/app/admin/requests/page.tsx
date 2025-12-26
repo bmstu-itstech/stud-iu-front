@@ -57,7 +57,7 @@ export default function RequestsPage() {
 
     useEffect(() => {
         fetchRequests();
-    }, [filterStatus, filterDept]);
+    }, [filterStatus, filterDept, fetchRequests]);
 
     return (
         <div className="space-y-10">

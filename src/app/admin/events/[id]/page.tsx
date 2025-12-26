@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 
 import { Title } from '@/shared/ui/Typography';
 import EventCard from '@/sections/Events/components/EventCard';
-import { EventType } from '@prisma/client';
+import type { EventType } from '@prisma/client';
 import apiClient from '@/shared/api/axios';
 
 interface EventForm {
@@ -105,7 +105,7 @@ export default function EditEventPage() {
             toast.success('Событие обновлено');
             router.push('/admin/events');
             router.refresh();
-        } catch (e: any) {
+        } catch (e: unknown) {
             console.error(e);
             toast.error('Ошибка обновления');
         } finally {

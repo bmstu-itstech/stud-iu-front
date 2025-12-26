@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useMemo } from 'react';
+import { type FC, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useNewsList } from '@/shared/hooks/useNews';
 

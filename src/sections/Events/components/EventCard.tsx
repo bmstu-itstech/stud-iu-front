@@ -1,9 +1,9 @@
 'use client';
 import Image from 'next/image';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import { Caption, Title } from '@/shared/ui/Typography';
-import { FutureEvent } from '@/shared/api';
+import type { FutureEvent } from '@/shared/api';
 
 type Props = FutureEvent & {
     mode?: 'full' | 'compact' | 'minified';

@@ -1,26 +1,60 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import eslint from '@eslint/js'
+import tsParser from '@typescript-eslint/parser'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import prettier from 'eslint-config-prettier/flat'
+import { defineConfig } from 'eslint/config'
+import tseslint from 'typescript-eslint'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const eslintConfig = defineConfig([
+    {
+        ignores: ['.next/', 'next-env.d.ts', 'payload/payload-types.ts', 'app/**/importMap.js'],
+    },
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+    eslint.configs.recommended,
+    ...tseslint.configs.recommended,
+    ...nextVitals,
+    ...nextTs,
 
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-  {
-    rules: {
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
-      "react/no-unescaped-entities": "off",
-      "import/no-anonymous-default-export": "off",
+    prettier,
 
-      "no-console": ["warn", { allow: ["warn", "error"] }],
-    }
-  }
-];
+    {
+        files: ['**/*.{ts,tsx,js,jsx}'],
+        languageOptions: {
+            ecmaVersion: 'latest',
+            parser: tsParser,
+            parserOptions: {
+                project: ['./tsconfig.json'],
+                tsconfigRootDir: import.meta.dirname,
+            },
+            sourceType: 'module',
+        },
+    },
 
-export default eslintConfig;
+    {
+        rules: {
+            'no-unused-vars': 'off',
+            '@typescript-eslint/no-unused-vars': [
+                'warn',
+                {
+                    argsIgnorePattern: '^_',
+                    varsIgnorePattern: '^_',
+                    caughtErrorsIgnorePattern: '^_',
+                },
+            ],
+
+            '@typescript-eslint/consistent-type-imports': [
+                'error',
+                {
+                    prefer: 'type-imports',
+                    fixStyle: 'inline-type-imports',
+                },
+            ],
+
+            '@typescript-eslint/no-explicit-any': 'warn',
+            'perfectionist/sort-jsx-props': 'off'
+        },
+    },
+])
+
+export default eslintConfig

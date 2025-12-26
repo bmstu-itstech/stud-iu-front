@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 import { Text, Title } from '@/shared/ui/Typography';
-import { ContactProps } from '../contacts';
+import type { ContactProps } from '../contacts';
 
 const Contact: FC<ContactProps> = ({ avatarUrl, name, role }) => {
     return (

@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { ensureAdmin } from '@/lib/auth-check';
-import { RequestStatus } from '@prisma/client';
+import type { RequestStatus } from '@prisma/client';
 
 type Props = {
     params: Promise<{ id: string }>;
@@ -32,7 +32,7 @@ export async function PUT(req: NextRequest, { params }: Props) {
             },
         });
         return NextResponse.json(updated);
-    } catch (e) {
+    } catch {
         return NextResponse.json({ error: 'Error updating' }, { status: 500 });
     }
 }

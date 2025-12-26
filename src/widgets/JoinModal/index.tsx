@@ -1,7 +1,7 @@
 'use client';
 
-import { FC, useEffect } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { type FC, useEffect } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { Title, Text } from '@/shared/ui/Typography';
 import Button from '@/shared/ui/Button';

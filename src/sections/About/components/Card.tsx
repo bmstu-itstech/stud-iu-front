@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 import Button from '@/shared/ui/Button';
 import { Text, Title } from '@/shared/ui/Typography';
-import { CardProps } from '../cards.usecase';
+import type { CardProps } from '../cards.usecase';
 
 const Card: FC<CardProps> = (props) => {
 

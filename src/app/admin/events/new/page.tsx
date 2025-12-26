@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 
 import { Title } from '@/shared/ui/Typography';
 import EventCard from '@/sections/Events/components/EventCard';
-import { EventType } from '@prisma/client';
+import type { EventType } from '@prisma/client';
 import { createEvent } from '@/shared/api';
 
 interface EventForm {
@@ -67,7 +67,7 @@ export default function CreateEventPage() {
             await createEvent(formData);
             toast.success('Событие создано');
             router.push('/admin/events');
-        } catch (e: any) {
+        } catch (e: unknown) {
             console.error(e);
             const errorMsg = e.response?.data?.error || 'Не удалось создать событие';
             toast.error(errorMsg);

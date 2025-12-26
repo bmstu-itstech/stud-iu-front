@@ -4,8 +4,8 @@ import {
     getPastEvents,
     getFutureEventById,
     getPastEventById,
-    FutureEvent,
-    PastEvent
+    type FutureEvent,
+    type PastEvent
 } from '@/shared/api';
 
 export const useFutureEvents = (limit = 10) => {

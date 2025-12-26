@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 import { Caption, Text, Title } from '@/shared/ui/Typography';
-import { News } from '@/shared/api';
+import type { News } from '@/shared/api';
 import { formatDate } from '@/shared/utils';
 import { cn } from '@/lib/utils';
 
