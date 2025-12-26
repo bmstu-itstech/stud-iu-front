@@ -1,0 +1,70 @@
+'use client';
+
+import Image from 'next/image';
+import { FC } from 'react';
+import { usePartners } from '@/shared/hooks/usePartners';
+
+import { Text, Title } from '@/shared/ui/Typography';
+import Contact from './components/Contact';
+import contacts from './contacts';
+
+const Additional: FC = () => {
+    const { data: partners, isLoading, isError } = usePartners(12);
+
+    return (
+        <section
+            id="additional"
+            className="flex flex-col w-full mx-auto px-6 py-40 pb-32 bg-gradient-to-b from-black to-blue-primary"
+        >
+            <div className="flex flex-col mx-auto w-full max-w-primary gap-24">
+
+                <div className="space-y-16">
+                    <Title level={1} className="text-white text-center sm:text-7xl">
+                        Наши партнёры
+                    </Title>
+
+                    <div className="flex overflow-x-auto gap-8 pb-4 scrollbar-hide sm:justify-center sm:flex-wrap min-h-[160px]">
+                        {isLoading ? (
+                            Array.from({ length: 6 }).map((_, i) => (
+                                <div key={i} className="w-40 h-40 bg-white/10 rounded-xl animate-pulse flex-shrink-0" />
+                            ))
+                        ) : isError ? (
+                            <div className="flex items-center justify-center w-full">
+                                <Text level={3} className="text-red-400 text-center">
+                                    Не удалось загрузить партнёров
+                                </Text>
+                            </div>
+                        ) : (
+                            partners?.map((partner) => (
+                                <div key={partner.id} className="w-40 h-40 bg-white rounded-xl flex items-center justify-center flex-shrink-0 p-4 hover:scale-105 transition-transform">
+                                    <Image
+                                        width={120}
+                                        height={120}
+                                        src={partner.image}
+                                        alt={partner.name}
+                                        className="object-contain w-full h-full"
+                                    />
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
+
+                <div className="space-y-16" id="contacts">
+                    <Title level={1} className="text-white text-center sm:text-7xl">
+                        Контакты
+                    </Title>
+
+                    <div className="flex flex-col lg:flex-row justify-between items-center gap-16 w-full max-w-[1600px] mx-auto">
+                        {contacts.map((contact) => (
+                            <Contact {...contact} key={contact.name} />
+                        ))}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    );
+};
+
+export default Additional;

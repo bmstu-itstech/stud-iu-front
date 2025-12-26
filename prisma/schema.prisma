@@ -1,0 +1,101 @@
+generator client {
+  provider   = "prisma-client-js"
+  output     = "../node_modules/.prisma/client"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum EventType {
+  FUTURE
+  PAST
+}
+
+enum Precision {
+  year
+  month
+  day
+  time
+}
+
+model BoardMember {
+  id            Int      @id @default(autoincrement())
+  name          String
+  telegram_link String
+  position      String
+  start_date    DateTime
+  description   String?
+  image         String?
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  cover_url   String?
+  created_at  DateTime @default(now())
+}
+
+model Partner {
+  id    Int     @id @default(autoincrement())
+  name  String
+  url   String?
+  image String
+}
+
+model Event {
+  id             Int       @id @default(autoincrement())
+  type           EventType
+  name           String
+  description    String?
+  place          String?
+  color          String?
+  precision      Precision @default(time)
+  start_datetime DateTime
+  end_datetime   DateTime?
+
+  album_link        String?
+  registration_link String?
+
+  images EventImage[]
+}
+
+model EventImage {
+  id       Int    @id @default(autoincrement())
+  image    String
+  event_id Int
+  event    Event  @relation(fields: [event_id], references: [id], onDelete: Cascade)
+}
+
+model AdminUser {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+}
+
+enum RequestStatus {
+  NEW
+  VIEWED
+  CONTACTED
+  INTERVIEW
+  ACCEPTED
+  REJECTED
+}
+
+model JoinRequest {
+  id       Int     @id @default(autoincrement())
+  name     String
+  group    String
+  telegram String
+  vk_link  String?
+
+  department String
+  answers    Json
+
+  status        RequestStatus @default(NEW)
+  admin_comment String?
+
+  created_at DateTime @default(now())
+}

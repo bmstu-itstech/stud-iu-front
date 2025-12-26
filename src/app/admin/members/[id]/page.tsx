@@ -1,0 +1,138 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRouter, useParams } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+
+import { Title } from '@/shared/ui/Typography';
+import Contact from '@/sections/Additional/components/Contact';
+import apiClient from '@/shared/api/axios';
+
+interface MemberForm {
+    name: string;
+    position: string;
+    telegram_link: string;
+    description: string;
+    start_date: string;
+    image: FileList;
+}
+
+export default function EditMemberPage() {
+    const router = useRouter();
+    const params = useParams();
+    const memberId = params.id;
+
+    const { register, handleSubmit, watch, reset } = useForm<MemberForm>();
+    const [previewImage, setPreviewImage] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const watchedName = watch('name');
+    const watchedPos = watch('position');
+
+    useEffect(() => {
+        if (!memberId) return;
+        apiClient.get(`/board_members/${memberId}`)
+            .then((res) => {
+                const data = res.data;
+                reset({
+                    name: data.name,
+                    position: data.position,
+                    telegram_link: data.telegram_link,
+                    description: data.description,
+                    start_date: data.start_date ? new Date(data.start_date).toISOString().split('T')[0] : '',
+                });
+                setPreviewImage(data.image);
+            })
+            .catch(() => {
+                toast.error('Не удалось загрузить участника');
+                router.push('/admin/members');
+            })
+            .finally(() => setIsLoading(false));
+    }, [memberId, reset, router]);
+
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) setPreviewImage(URL.createObjectURL(file));
+    };
+
+    const onSubmit = async (data: MemberForm) => {
+        setIsSubmitting(true);
+        const formData = new FormData();
+
+        formData.append('name', data.name);
+        formData.append('position', data.position);
+        formData.append('telegram_link', data.telegram_link || '');
+        formData.append('description', data.description || '');
+        formData.append('start_date', data.start_date);
+
+        if (data.image && data.image.length > 0) {
+            formData.append('image', data.image[0]);
+        }
+
+        try {
+            await apiClient.put(`/board_members/${memberId}`, formData);
+            toast.success('Данные обновлены');
+            router.push('/admin/members');
+            router.refresh();
+        } catch {
+            toast.error('Ошибка обновления');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    if (isLoading) return <div>Загрузка...</div>;
+
+    return (
+        <div className="flex flex-col gap-8 h-[calc(100vh-6rem)]">
+            <div className="flex justify-between items-center">
+                <Title className="!text-5xl tracking-tight">Редактировать участника</Title>
+                <button
+                    onClick={handleSubmit(onSubmit)}
+                    disabled={isSubmitting}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-3xl font-bold text-xl shadow-xl transition-all active:scale-95 disabled:opacity-70"
+                >
+                    {isSubmitting ? 'Сохранение...' : 'Сохранить изменения'}
+                </button>
+            </div>
+
+            <div className="flex flex-1 gap-10">
+                <div className="w-1/2 bg-white rounded-[2.5rem] p-10 shadow-sm flex flex-col gap-6 overflow-y-auto border border-gray-200">
+                    <input {...register('name', { required: true })} className="p-6 bg-gray-50 rounded-2xl text-xl font-bold outline-none focus:ring-2 focus:ring-blue-500/20" placeholder="ФИО" />
+                    <input {...register('position', { required: true })} className="p-6 bg-gray-50 rounded-2xl text-xl font-medium outline-none focus:ring-2 focus:ring-blue-500/20" placeholder="Должность" />
+
+                    <div className="grid grid-cols-2 gap-6">
+                        <input {...register('telegram_link')} className="p-6 bg-gray-50 rounded-2xl text-lg font-medium outline-none" placeholder="Telegram (@username)" />
+                        <input type="date" {...register('start_date')} className="p-6 bg-gray-50 rounded-2xl text-lg font-medium outline-none" />
+                    </div>
+
+                    <textarea {...register('description')} className="p-6 bg-gray-50 rounded-2xl text-lg min-h-[140px] outline-none resize-none" placeholder="Описание деятельности..." />
+
+                    <div className="mt-auto">
+                        <label className="block text-gray-400 font-bold mb-2 uppercase text-xs tracking-wider">Фотография</label>
+                        <input
+                            type="file"
+                            {...register('image', { onChange: handleImageChange })}
+                            className="block w-full text-lg text-gray-500 file:mr-6 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-base file:font-bold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 transition-all cursor-pointer"
+                        />
+                    </div>
+                </div>
+
+                <div className="w-1/2 bg-gradient-to-b from-gray-900 to-blue-900 rounded-[2.5rem] p-10 flex items-center justify-center relative shadow-2xl">
+                    <div className="absolute top-8 right-8 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-white tracking-widest uppercase">PREVIEW</div>
+
+                    <div className="scale-125">
+                        <Contact
+                            name={watchedName || 'Имя Фамилия'}
+                            role={watchedPos || 'Должность'}
+                            avatarUrl={previewImage || '/placeholder.png'}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

@@ -1,26 +1,48 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --color-brown-700: #533333;
+    --color-purple-neon: #c21cff;
+    --color-blue-sky: #2440de;
+    --color-blue-primary: #3a7fff;
+    --color-indigo-deep: #2440de;
+    --color-green-neon: #1de474;
+
+    --text-wh3xl: calc(1.75rem * var(--dpr-ratio));
+    --text-h3xl: calc(2rem * var(--dpr-ratio));
+    --text-h4xl: calc(2.5rem * var(--dpr-ratio));
+    --text-h8xl: calc(5.625rem * var(--dpr-ratio));
+
+    --max-width-primary: 180rem;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --dpr-ratio: 1.5;
+    --radius: 0.625rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer base {
+    * {
+        @apply border-gray-200 outline-blue-primary/50;
+    }
+    body {
+        @apply bg-white text-black min-h-dvh antialiased;
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+    font-size: clamp(0.2rem, 0.4vw + 0.1rem, 0.6rem);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (width <= 40rem) {
+    html {
+        font-size: clamp(0.2rem, 1.2vw + 0.1rem, 0.6rem);
+    }
+}
+
+.scrolling-active {
+    scroll-snap-type: none;
 }
