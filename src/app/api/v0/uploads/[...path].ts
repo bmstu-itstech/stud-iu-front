@@ -21,7 +21,7 @@ export async function GET(
     const filePathParams = params.path;
     const fileName = filePathParams.join("/");
 
-    const fullPath = path.join(process.cwd(), "uploads", fileName);
+    const fullPath = path.join(process.cwd(), "public", "uploads", fileName);
 
     if (!fs.existsSync(fullPath)) {
         return new NextResponse("File not found", { status: 404 });
