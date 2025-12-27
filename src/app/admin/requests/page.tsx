@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Title, Text } from '@/shared/ui/Typography';
 import apiClient from '@/shared/api/axios';
@@ -39,7 +39,7 @@ export default function RequestsPage() {
     const [filterDept, setFilterDept] = useState('ALL');
     const [isLoading, setIsLoading] = useState(true);
 
-    const fetchRequests = async () => {
+    const fetchRequests = useCallback(async () => {
         setIsLoading(true);
         try {
             const params = new URLSearchParams();
@@ -53,7 +53,7 @@ export default function RequestsPage() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [filterStatus, filterDept]);
 
     useEffect(() => {
         fetchRequests();
