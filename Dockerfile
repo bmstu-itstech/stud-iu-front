@@ -27,7 +27,6 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
-RUN mkdir -p ./public/uploads && chown -R nextjs:nodejs ./public
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./
 # Я знаю, что так делать нельзя, но Next вынуждает меня
@@ -39,6 +38,9 @@ RUN chown nextjs:nodejs .next
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+RUN mkdir -p /app/public/uploads/events
+RUN chown -R nextjs:nodejs /app/public
 
 USER nextjs
 
