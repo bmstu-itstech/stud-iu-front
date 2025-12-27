@@ -25,7 +25,7 @@ export async function saveFile(file: File | unknown, folder: string): Promise<st
         const safeName = fileObj.name.replace(/[^a-zA-Z0-9.-]/g, '_');
         const filename = `${timestamp}-${safeName}`;
 
-        const uploadDir = path.join(process.cwd(), 'public', 'uploads', folder);
+        const uploadDir = path.join(process.cwd(), 'uploads', folder);
         const filePath = path.join(uploadDir, filename);
 
         await mkdir(uploadDir, { recursive: true });
