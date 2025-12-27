@@ -9,6 +9,7 @@ import type { PastEvent, FutureEvent } from '@/shared/api';
 import { Text, Title } from '@/shared/ui/Typography';
 import { useDotButton } from '@/shared/utils/useDotButton';
 import { getImageUrl } from '@/shared/utils/getImageUrl';
+import { ExpandableDescription } from './components/ExpandableDescription';
 
 type BaseEvent = Partial<PastEvent & FutureEvent>;
 
@@ -93,9 +94,8 @@ const Carousel: FC<CarouselProps> = ({ slides, options }) => {
                                                 </span>
                                             )}
                                         </div>
-                                        <Text level={2} className="text-gray-200 drop-shadow-md max-w-4xl leading-relaxed opacity-90 line-clamp-5">
-                                            {slide.description}
-                                        </Text>
+
+                                        <ExpandableDescription text={slide.description} />
                                     </div>
 
                                     <div className="flex flex-wrap items-end justify-between gap-8 mt-12">
