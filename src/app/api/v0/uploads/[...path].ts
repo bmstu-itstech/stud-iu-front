@@ -14,6 +14,8 @@ function getContentType(ext: string) {
     return map[ext] || "application/octet-stream";
 }
 
+const UPLOAD_DIR = "/app/public/uploads";
+
 export async function GET(
     req: NextRequest,
     { params }: { params: { path: string[] } }
@@ -21,9 +23,16 @@ export async function GET(
     const filePathParams = params.path;
     const fileName = filePathParams.join("/");
 
-    const fullPath = path.join(process.cwd(), "public", "uploads", fileName);
+    const fullPath = path.join(UPLOAD_DIR, fileName);
 
     if (!fs.existsSync(fullPath)) {
+        console.error(`[API] ❌ Файл не найден: ${fullPath}`);
+        try {
+            const dir = path.dirname(fullPath);
+            console.log(`[API] Содержимое папки ${dir}:`, fs.readdirSync(dir));
+        } catch (e) {
+            console.log(`[API] Папка ${path.dirname(fullPath)} не существует или недоступна`);
+        }
         return new NextResponse("File not found", { status: 404 });
     }
 
