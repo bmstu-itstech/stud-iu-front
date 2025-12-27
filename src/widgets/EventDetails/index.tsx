@@ -93,8 +93,7 @@ const Carousel: FC<CarouselProps> = ({ slides, options }) => {
                                                 </span>
                                             )}
                                         </div>
-
-                                        <Text level={2} className="text-gray-200 drop-shadow-md max-w-3xl leading-relaxed opacity-90">
+                                        <Text level={2} className="text-gray-200 drop-shadow-md max-w-4xl leading-relaxed opacity-90 line-clamp-5">
                                             {slide.description}
                                         </Text>
                                     </div>
