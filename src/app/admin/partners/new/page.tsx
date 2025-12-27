@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 import { Title, Text } from '@/shared/ui/Typography';
 import apiClient from '@/shared/api/axios';
+import {getImageUrl} from "@/shared/utils/getImageUrl";
 
 interface PartnerForm {
     name: string;
@@ -93,7 +94,7 @@ export default function CreatePartnerPage() {
 
                     <div className="w-64 h-64 bg-white rounded-3xl flex items-center justify-center p-8 shadow-2xl">
                         {previewImage ? (
-                            <Image src={`/api/storage/${previewImage}`} width={200} height={200} alt="Logo" className="object-contain w-full h-full" />
+                            <Image src={getImageUrl(previewImage)} width={200} height={200} alt="Logo" className="object-contain w-full h-full" />
                         ) : (
                             <div className="text-gray-300 font-bold text-xl">Логотип</div>
                         )}
