@@ -17,7 +17,7 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./uploads_data:/app/public/uploads
+      - ./uploads_data:/app/uploads
   db:
     container_name: stud_iu_postgres
     image: postgres:15-alpine
