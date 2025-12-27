@@ -47,7 +47,7 @@ export default async function MembersListPage() {
                             <td className="px-12 py-8 align-middle">
                                 <div className="w-32 h-32 rounded-[2.5rem] overflow-hidden bg-gray-100 relative border border-gray-200 shrink-0 shadow-sm">
                                     {member.image ? (
-                                        <Image src={member.image} fill className="object-cover" alt={member.name} />
+                                        <Image src={`/api/storage/${member.image}`} fill className="object-cover" alt={member.name} />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center text-gray-300 font-bold text-lg">
                                             NO IMG

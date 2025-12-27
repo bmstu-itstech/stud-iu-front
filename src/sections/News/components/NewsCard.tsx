@@ -24,7 +24,7 @@ const NewsCard: FC<Props> = ({ mode = 'default', ...props }) => {
         >
             <div className="overflow-hidden rounded-[2rem] relative w-full bg-gray-100">
                 <Image
-                    src={props.cover_url || '/placeholder.png'}
+                    src={`/api/storage/${props.cover_url}` || '/placeholder.png'}
                     width={800}
                     height={400}
                     className={cn(

@@ -54,7 +54,7 @@ const Carousel: FC<CarouselProps> = ({ slides, options }) => {
                             >
                                 <div className="absolute inset-0 z-0">
                                     <Image
-                                        src={slide.images?.[0]?.image || '/event.png'}
+                                        src={`/api/storage/${slide.images?.[0]?.image}` || '/event.png'}
                                         fill
                                         className="object-cover"
                                         alt={slide.name || 'Event'}

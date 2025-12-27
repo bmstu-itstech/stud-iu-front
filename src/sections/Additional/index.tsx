@@ -40,7 +40,7 @@ const Additional: FC = () => {
                                     <Image
                                         width={120}
                                         height={120}
-                                        src={partner.image}
+                                        src={`/api/storage/${partner.image}`}
                                         alt={partner.name}
                                         className="object-contain w-full h-full"
                                     />

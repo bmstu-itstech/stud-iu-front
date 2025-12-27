@@ -101,7 +101,7 @@ export default function EditPartnerPage() {
 
                     <div className="w-64 h-64 bg-white rounded-3xl flex items-center justify-center p-8 shadow-2xl">
                         {previewImage ? (
-                            <Image src={previewImage} width={200} height={200} alt="Logo" className="object-contain w-full h-full" />
+                            <Image src={`/api/storage/${previewImage}`} width={200} height={200} alt="Logo" className="object-contain w-full h-full" />
                         ) : (
                             <div className="text-gray-300 font-bold text-xl">Логотип</div>
                         )}

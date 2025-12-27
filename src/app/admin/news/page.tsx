@@ -50,7 +50,7 @@ export default async function NewsListPage() {
                             <td className="px-12 py-8 align-middle">
                                 <div className="w-32 h-32 rounded-3xl overflow-hidden bg-gray-100 relative border border-gray-200 shrink-0 shadow-sm">
                                     {item.cover_url ? (
-                                        <Image src={item.cover_url} fill className="object-cover" alt="" />
+                                        <Image src={`/api/storage/${item.cover_url}`} fill className="object-cover" alt="" />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center text-gray-300 font-bold text-lg">
                                             NO IMG

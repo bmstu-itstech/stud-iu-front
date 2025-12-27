@@ -12,6 +12,10 @@ export async function GET(
     const fileName = filePathParams.join("/");
     const fullPath = path.join(UPLOAD_DIR, fileName);
 
+    if (!fullPath.startsWith(UPLOAD_DIR)) {
+        return new NextResponse("Access denied", { status: 403 });
+    }
+
     if (!fs.existsSync(fullPath)) {
         return new NextResponse("File not found", { status: 404 });
     }

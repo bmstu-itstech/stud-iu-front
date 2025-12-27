@@ -52,7 +52,7 @@ export default async function EventsListPage() {
                                 <td className="px-12 py-8 align-middle">
                                     <div className="w-32 h-32 rounded-3xl overflow-hidden bg-gray-100 relative border border-gray-200 shrink-0 shadow-sm">
                                         {mainImage ? (
-                                            <Image src={mainImage} fill className="object-cover" alt={event.name} />
+                                            <Image src={`api/storage/${mainImage}`} fill className="object-cover" alt={event.name} />
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center text-gray-300 font-bold text-lg">
                                                 NO IMG

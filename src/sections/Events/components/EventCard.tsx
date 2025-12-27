@@ -33,7 +33,7 @@ const EventCard: FC<Props> = ({ mode = 'full', ...props }) => {
                     width={150}
                     height={150}
                     alt={props.name}
-                    src={imageUrl}
+                    src={`/api/storage/${imageUrl}`}
                     className="rounded-3xl object-cover w-[100px] h-[100px] my-auto mr-6 bg-white/10 shrink-0 self-center"
                 />
             </div>
@@ -47,7 +47,7 @@ const EventCard: FC<Props> = ({ mode = 'full', ...props }) => {
                 className="rounded-[2.5rem] bg-white overflow-hidden w-full aspect-[3/4] relative cursor-pointer select-none shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 group"
             >
                 <Image
-                    src={imageUrl}
+                    src={`/api/storage/${imageUrl}`}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     alt={props.name}
@@ -70,7 +70,7 @@ const EventCard: FC<Props> = ({ mode = 'full', ...props }) => {
             className="rounded-[2rem] bg-white overflow-hidden w-full min-w-[320px] max-w-220 relative cursor-pointer select-none group shadow-sm hover:shadow-md transition-shadow"
         >
             <div className="h-110 relative w-full">
-                <Image src={imageUrl} fill className="object-cover z-10" alt={props.name} />
+                <Image src={`/api/storage/${imageUrl}`} fill className="object-cover z-10" alt={props.name} />
 
                 <div
                     className="absolute inset-0 z-10"
