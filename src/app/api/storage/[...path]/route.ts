@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
 
-const UPLOAD_DIR = "/app/uploads";
+const UPLOAD_DIR = "/app/storage";
 
 export async function GET(
     req: NextRequest,
