@@ -5,6 +5,7 @@ import { Caption, Text, Title } from '@/shared/ui/Typography';
 import type { News } from '@/shared/api';
 import { formatDate } from '@/shared/utils';
 import { cn } from '@/lib/utils';
+import { getImageUrl } from '@/shared/utils/getImageUrl';
 
 type Props = News & {
     mode?: 'default' | 'preview';
@@ -12,6 +13,7 @@ type Props = News & {
 
 const NewsCard: FC<Props> = ({ mode = 'default', ...props }) => {
     const isPreview = mode === 'preview';
+    const imageUrl = getImageUrl(props.cover_url);
 
     return (
         <div
@@ -24,7 +26,7 @@ const NewsCard: FC<Props> = ({ mode = 'default', ...props }) => {
         >
             <div className="overflow-hidden rounded-[2rem] relative w-full bg-gray-100">
                 <Image
-                    src={`/api/storage/${props.cover_url}` || '/placeholder.png'}
+                    src={imageUrl}
                     width={800}
                     height={400}
                     className={cn(

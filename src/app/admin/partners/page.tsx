@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { db } from '@/lib/db';
 import { Title, Text } from '@/shared/ui/Typography';
 import { AdminActions } from '@/shared/ui/AdminActions';
+import {getImageUrl} from "@/shared/utils/getImageUrl";
 
 const PlusIcon = () => (
     <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -37,7 +38,7 @@ export default async function PartnersListPage() {
                 {partners.map((partner) => (
                     <div key={partner.id} className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100 flex flex-col items-center gap-8 text-center group hover:shadow-xl hover:border-blue-100 transition-all duration-300">
                         <div className="relative w-48 h-48 flex items-center justify-center bg-gray-50 rounded-3xl p-6 group-hover:scale-105 transition-transform duration-300">
-                            <Image src={`/api/storage/${partner.image}`} width={200} height={200} className="object-contain w-full h-full" alt={partner.name} />
+                            <Image src={getImageUrl(partner.image)} width={200} height={200} className="object-contain w-full h-full" alt={partner.name} />
                         </div>
                         <Title className="!text-2xl line-clamp-1">{partner.name}</Title>
 

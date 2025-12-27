@@ -7,6 +7,7 @@ import { usePartners } from '@/shared/hooks/usePartners';
 import { Text, Title } from '@/shared/ui/Typography';
 import Contact from './components/Contact';
 import contacts from './contacts';
+import {getImageUrl} from "@/shared/utils/getImageUrl";
 
 const Additional: FC = () => {
     const { data: partners, isLoading, isError } = usePartners(12);
@@ -40,7 +41,7 @@ const Additional: FC = () => {
                                     <Image
                                         width={120}
                                         height={120}
-                                        src={`/api/storage/${partner.image}`}
+                                        src={getImageUrl(partner.image)}
                                         alt={partner.name}
                                         className="object-contain w-full h-full"
                                     />

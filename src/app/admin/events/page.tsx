@@ -4,6 +4,7 @@ import { db } from '@/lib/db';
 import { formatDate } from '@/shared/utils';
 import { Title, Text } from '@/shared/ui/Typography';
 import { AdminActions } from '@/shared/ui/AdminActions';
+import { getImageUrl } from '@/shared/utils/getImageUrl';
 
 const PlusIcon = () => <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" /></svg>;
 
@@ -52,7 +53,7 @@ export default async function EventsListPage() {
                                 <td className="px-12 py-8 align-middle">
                                     <div className="w-32 h-32 rounded-3xl overflow-hidden bg-gray-100 relative border border-gray-200 shrink-0 shadow-sm">
                                         {mainImage ? (
-                                            <Image src={`api/storage/${mainImage}`} fill className="object-cover" alt={event.name} />
+                                            <Image src={getImageUrl(mainImage)} fill className="object-cover" alt={event.name} />
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center text-gray-300 font-bold text-lg">
                                                 NO IMG
@@ -91,10 +92,10 @@ export default async function EventsListPage() {
                                     </Text>
                                 </td>
                                 <td className="px-12 py-8 align-middle text-right">
-                                    <AdminActions 
-                                        id={event.id} 
-                                        basePath="/admin/events" 
-                                        apiPath="/events" 
+                                    <AdminActions
+                                        id={event.id}
+                                        basePath="/admin/events"
+                                        apiPath="/events"
                                     />
                                 </td>
                             </tr>

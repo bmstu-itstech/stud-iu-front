@@ -8,6 +8,7 @@ import type { FC, ReactNode } from 'react';
 import type { PastEvent, FutureEvent } from '@/shared/api';
 import { Text, Title } from '@/shared/ui/Typography';
 import { useDotButton } from '@/shared/utils/useDotButton';
+import { getImageUrl } from '@/shared/utils/getImageUrl';
 
 type BaseEvent = Partial<PastEvent & FutureEvent>;
 
@@ -46,6 +47,7 @@ const Carousel: FC<CarouselProps> = ({ slides, options }) => {
                 <div className="flex h-full">
                     {slides.map((slide, index) => {
                         const eventColor = slide.color || '#3a7fff';
+                        const imageUrl = getImageUrl(slide.images?.[0]?.image);
 
                         return (
                             <div
@@ -54,7 +56,7 @@ const Carousel: FC<CarouselProps> = ({ slides, options }) => {
                             >
                                 <div className="absolute inset-0 z-0">
                                     <Image
-                                        src={`/api/storage/${slide.images?.[0]?.image}` || '/event.png'}
+                                        src={imageUrl}
                                         fill
                                         className="object-cover"
                                         alt={slide.name || 'Event'}
