@@ -30,7 +30,7 @@ export const ExpandableDescription = ({ text }: Props) => {
             {isLongText && (
                 <button
                     onClick={() => setIsExpanded(!isExpanded)}
-                    className="text-blue-400 hover:text-blue-300 font-bold text-lg uppercase tracking-wider transition-colors focus:outline-none border-b border-transparent hover:border-blue-300 pb-0.5"
+                    className="text-blue-400 hover:text-blue-300 font-bold text-3xl uppercase tracking-wider transition-colors focus:outline-none border-b border-transparent hover:border-blue-300 pb-0.5"
                 >
                     {isExpanded ? 'Свернуть' : 'Подробнее...'}
                 </button>
