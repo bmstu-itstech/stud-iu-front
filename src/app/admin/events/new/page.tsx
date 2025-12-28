@@ -69,33 +69,32 @@ export default function CreateEventPage() {
             router.push('/admin/events');
         } catch (e: unknown) {
             console.error(e);
-            const errorMsg = (e as any).response?.data?.error || 'Не удалось создать событие';
-            toast.error(errorMsg);
+            toast.error('Не удалось создать событие');
         } finally {
             setIsSubmitting(false);
         }
     };
 
     return (
-        <div className="flex flex-col gap-8 h-[calc(100vh-6rem)]">
-            <div className="flex justify-between items-center">
-                <Title className="!text-5xl tracking-tight">Создать событие</Title>
+        <div className="flex flex-col gap-8 h-auto lg:h-[calc(100vh-6rem)]">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <Title className="!text-3xl sm:!text-5xl tracking-tight">Создать событие</Title>
                 <button
                     onClick={handleSubmit(onSubmit)}
                     disabled={isSubmitting}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-3xl font-bold text-xl shadow-xl transition-all active:scale-95 disabled:opacity-70"
+                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 sm:px-10 sm:py-4 rounded-3xl font-bold text-lg sm:text-xl shadow-xl transition-all active:scale-95 disabled:opacity-70"
                 >
                     {isSubmitting ? 'Сохранение...' : 'Опубликовать'}
                 </button>
             </div>
 
-            <div className="flex flex-1 gap-10 overflow-hidden">
-                <div className="w-1/2 bg-white rounded-[2.5rem] p-10 shadow-sm flex flex-col gap-6 overflow-y-auto border border-gray-200 custom-scrollbar">
-                    <div className="flex gap-4 p-2 bg-gray-100 rounded-2xl">
-                        <label className={`flex-1 text-center py-4 rounded-xl cursor-pointer transition-all font-bold text-lg ${wType === 'FUTURE' ? 'bg-white shadow-md text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}>
+            <div className="flex flex-col lg:flex-row flex-1 gap-10 overflow-visible lg:overflow-hidden">
+                <div className="w-full lg:w-1/2 bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 shadow-sm flex flex-col gap-6 overflow-y-auto border border-gray-200 custom-scrollbar h-auto lg:h-full">
+                    <div className="flex flex-col sm:flex-row gap-4 p-2 bg-gray-100 rounded-2xl">
+                        <label className={`flex-1 text-center py-3 sm:py-4 rounded-xl cursor-pointer transition-all font-bold text-lg ${wType === 'FUTURE' ? 'bg-white shadow-md text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}>
                             <input type="radio" value="FUTURE" {...register('type')} className="hidden" /> Предстоящее
                         </label>
-                        <label className={`flex-1 text-center py-4 rounded-xl cursor-pointer transition-all font-bold text-lg ${wType === 'PAST' ? 'bg-white shadow-md text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}>
+                        <label className={`flex-1 text-center py-3 sm:py-4 rounded-xl cursor-pointer transition-all font-bold text-lg ${wType === 'PAST' ? 'bg-white shadow-md text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}>
                             <input type="radio" value="PAST" {...register('type')} className="hidden" /> Прошедшее
                         </label>
                     </div>
@@ -103,10 +102,10 @@ export default function CreateEventPage() {
                     <input {...register('name', { required: 'Введите название' })} className="p-6 bg-gray-50 rounded-2xl text-xl font-bold placeholder:font-normal focus:ring-2 focus:ring-blue-500/20 outline-none transition-all" placeholder="Название события" />
                     <textarea {...register('description')} className="p-6 bg-gray-50 rounded-2xl text-lg min-h-[140px] focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none" placeholder="Описание события..." />
 
-                    <div className="flex gap-6">
-                        <input type="datetime-local" {...register('start_datetime', { required: 'Выберите дату' })} className="flex-1 p-6 bg-gray-50 rounded-2xl text-lg font-medium outline-none" />
-                        <div className="relative w-24 h-full">
-                            <input type="color" {...register('color')} className="w-full h-full min-h-[72px] p-2 bg-gray-50 rounded-2xl cursor-pointer" />
+                    <div className="flex flex-col sm:flex-row gap-6">
+                        <input type="datetime-local" {...register('start_datetime', { required: 'Выберите дату' })} className="w-full sm:flex-1 p-6 bg-gray-50 rounded-2xl text-lg font-medium outline-none" />
+                        <div className="relative w-full sm:w-24 h-16 sm:h-auto">
+                            <input type="color" {...register('color')} className="w-full h-full p-2 bg-gray-50 rounded-2xl cursor-pointer" />
                         </div>
                     </div>
 
@@ -130,7 +129,7 @@ export default function CreateEventPage() {
                     </div>
                 </div>
 
-                <div className="w-1/2 bg-gray-100 rounded-[2.5rem] p-10 flex items-center justify-center relative border border-dashed border-gray-300">
+                <div className="hidden lg:flex w-1/2 bg-gray-100 rounded-[2.5rem] p-10 items-center justify-center relative border border-dashed border-gray-300">
                     <div className="absolute top-8 right-8 bg-white px-4 py-2 rounded-full text-xs font-bold text-gray-400 tracking-widest uppercase shadow-sm">Live Preview</div>
                     <div className="scale-110 origin-center pointer-events-none">
                         <EventCard

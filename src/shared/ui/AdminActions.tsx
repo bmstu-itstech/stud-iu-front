@@ -30,16 +30,16 @@ export const AdminActions = ({ id, basePath, apiPath }: AdminActionsProps) => {
     };
 
     return (
-        <div className="flex justify-end gap-4 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
-            <button 
+        <div className="flex justify-end gap-2 sm:gap-4 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+            <button
                 onClick={handleEdit}
-                className="text-gray-600 hover:text-blue-600 bg-gray-100 hover:bg-blue-50 px-8 py-4 rounded-2xl transition-colors font-bold text-lg"
+                className="text-gray-600 hover:text-blue-600 bg-gray-100 hover:bg-blue-50 px-4 py-3 sm:px-8 sm:py-4 rounded-xl sm:rounded-2xl transition-colors font-bold text-sm sm:text-lg"
             >
                 Изменить
             </button>
-            <button 
+            <button
                 onClick={handleDelete}
-                className="text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 px-8 py-4 rounded-2xl transition-colors font-bold text-lg"
+                className="text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 px-4 py-3 sm:px-8 sm:py-4 rounded-xl sm:rounded-2xl transition-colors font-bold text-sm sm:text-lg"
             >
                 Удалить
             </button>

@@ -46,8 +46,8 @@ const STATUS_OPTIONS = [
     { value: 'REJECTED', label: 'Отказ', color: 'bg-red-50 text-red-700 border-red-200' },
 ];
 
-const valueClasses = "w-full px-10 py-8 bg-gray-50 rounded-[2.5rem] font-bold text-3xl text-gray-900 border-2 border-transparent leading-normal";
-const labelClasses = "block text-lg font-extrabold text-gray-400 uppercase tracking-widest ml-6 mb-4";
+const valueClasses = "w-full px-6 py-5 sm:px-10 sm:py-8 bg-gray-50 rounded-2xl sm:rounded-[2.5rem] font-bold text-lg sm:text-3xl text-gray-900 border-2 border-transparent leading-normal break-words";
+const labelClasses = "block text-sm sm:text-lg font-extrabold text-gray-400 uppercase tracking-widest ml-3 sm:ml-6 mb-2 sm:mb-4";
 
 export default function RequestDetailsPage() {
     const { id } = useParams();
@@ -88,39 +88,39 @@ export default function RequestDetailsPage() {
     const currentFields = DEPT_FIELDS[req.department] || [];
 
     return (
-        <div className="w-full h-full p-8 md:p-12 pb-32">
+        <div className="w-full h-full p-4 sm:p-8 md:p-12 pb-32">
 
-            <div className="flex flex-col 2xl:flex-row justify-between items-start 2xl:items-center gap-8 mb-16">
+            <div className="flex flex-col 2xl:flex-row justify-between items-start 2xl:items-center gap-6 sm:gap-8 mb-8 sm:mb-16">
                 <div>
-                    <div className="flex flex-wrap items-center gap-6 mb-4">
-                        <Title className="!text-6xl md:!text-7xl tracking-tight">{req.name}</Title>
-                        <span className="bg-blue-600 text-white px-8 py-3 rounded-[2rem] font-bold text-2xl tracking-wide shadow-xl shadow-blue-500/30">
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-6 mb-2 sm:mb-4">
+                        <Title className="!text-3xl sm:!text-6xl md:!text-7xl tracking-tight break-all">{req.name}</Title>
+                        <span className="bg-blue-600 text-white px-4 py-2 sm:px-8 sm:py-3 rounded-xl sm:rounded-[2rem] font-bold text-sm sm:text-2xl tracking-wide shadow-xl shadow-blue-500/30">
                             {req.department}
                         </span>
                     </div>
-                    <Text className="text-gray-400 font-medium !text-3xl ml-2">
+                    <Text className="text-gray-400 font-medium !text-lg sm:!text-3xl ml-1 sm:ml-2">
                         Заявка от {formatDate(req.created_at)}
                     </Text>
                 </div>
 
-                <div className="flex gap-6 w-full 2xl:w-auto">
-                    <button onClick={() => router.back()} className="flex-1 2xl:flex-none px-12 py-6 rounded-[2.5rem] font-bold text-2xl text-gray-500 bg-white border-2 border-gray-100 hover:bg-gray-50 transition-colors">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full 2xl:w-auto">
+                    <button onClick={() => router.back()} className="flex-1 2xl:flex-none px-8 py-4 sm:px-12 sm:py-6 rounded-2xl sm:rounded-[2.5rem] font-bold text-lg sm:text-2xl text-gray-500 bg-white border-2 border-gray-100 hover:bg-gray-50 transition-colors">
                         Назад
                     </button>
-                    <button onClick={handleDelete} className="flex-1 2xl:flex-none px-12 py-6 rounded-[2.5rem] font-bold text-2xl text-red-500 bg-red-50 hover:bg-red-100 transition-colors">
+                    <button onClick={handleDelete} className="flex-1 2xl:flex-none px-8 py-4 sm:px-12 sm:py-6 rounded-2xl sm:rounded-[2.5rem] font-bold text-lg sm:text-2xl text-red-500 bg-red-50 hover:bg-red-100 transition-colors">
                         Удалить
                     </button>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 2xl:grid-cols-12 gap-12 items-start">
+            <div className="grid grid-cols-1 2xl:grid-cols-12 gap-6 sm:gap-12 items-start">
 
-                <div className="2xl:col-span-8 flex flex-col gap-12">
+                <div className="2xl:col-span-8 flex flex-col gap-6 sm:gap-12">
 
-                    <div className="bg-white p-12 rounded-[3.5rem] shadow-sm border border-gray-100">
-                        <h3 className="text-gray-400 font-extrabold uppercase tracking-widest mb-10 text-xl ml-2">Контакты</h3>
+                    <div className="bg-white p-6 sm:p-12 rounded-[2rem] sm:rounded-[3.5rem] shadow-sm border border-gray-100">
+                        <h3 className="text-gray-400 font-extrabold uppercase tracking-widest mb-6 sm:mb-10 text-base sm:text-xl ml-2">Контакты</h3>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
                             <div>
                                 <span className={labelClasses}>Учебная группа</span>
                                 <div className={valueClasses}>{req.group}</div>
@@ -144,10 +144,10 @@ export default function RequestDetailsPage() {
                         </div>
                     </div>
 
-                    <div className="bg-white p-12 rounded-[3.5rem] shadow-sm border border-gray-100">
-                        <h3 className="text-gray-400 font-extrabold uppercase tracking-widest mb-12 text-xl ml-2">Ответы на вопросы</h3>
+                    <div className="bg-white p-6 sm:p-12 rounded-[2rem] sm:rounded-[3.5rem] shadow-sm border border-gray-100">
+                        <h3 className="text-gray-400 font-extrabold uppercase tracking-widest mb-6 sm:mb-12 text-base sm:text-xl ml-2">Ответы на вопросы</h3>
 
-                        <div className="flex flex-col gap-12">
+                        <div className="flex flex-col gap-8 sm:gap-12">
                             {currentFields.length > 0 ? (
                                 currentFields.map((key) => {
                                     const value = req.answers?.[key];
@@ -156,11 +156,11 @@ export default function RequestDetailsPage() {
                                             <span className={labelClasses}>
                                                 {FIELD_LABELS[key] || key}
                                             </span>
-                                            <div className={`${valueClasses} min-h-[100px] h-auto whitespace-pre-wrap`}>
+                                            <div className={`${valueClasses} min-h-[80px] sm:min-h-[100px] h-auto whitespace-pre-wrap`}>
                                                 {Array.isArray(value) ? (
-                                                    <div className="flex flex-wrap gap-4">
+                                                    <div className="flex flex-wrap gap-2 sm:gap-4">
                                                         {value.map((tag: string) => (
-                                                            <span key={tag} className="bg-white border-2 border-gray-200 px-6 py-3 rounded-[1.5rem] text-2xl font-bold text-gray-700 shadow-sm">
+                                                            <span key={tag} className="bg-white border-2 border-gray-200 px-4 py-2 sm:px-6 sm:py-3 rounded-xl sm:rounded-[1.5rem] text-sm sm:text-2xl font-bold text-gray-700 shadow-sm">
                                                                 {tag}
                                                             </span>
                                                         ))}
@@ -173,7 +173,7 @@ export default function RequestDetailsPage() {
                                     );
                                 })
                             ) : (
-                                <div className="text-gray-400 text-2xl font-bold ml-6">
+                                <div className="text-gray-400 text-lg sm:text-2xl font-bold ml-6">
                                     Нет вопросов для этого направления
                                 </div>
                             )}
@@ -181,30 +181,30 @@ export default function RequestDetailsPage() {
                     </div>
                 </div>
 
-                <div className="2xl:col-span-4 space-y-12 sticky top-12">
+                <div className="2xl:col-span-4 space-y-6 sm:space-y-12 sticky top-12">
 
-                    <div className="bg-white p-12 rounded-[3.5rem] shadow-xl shadow-blue-900/5 border border-blue-50">
-                        <h3 className="text-gray-400 font-extrabold uppercase tracking-widest mb-10 text-xl ml-2">Статус</h3>
+                    <div className="bg-white p-6 sm:p-12 rounded-[2rem] sm:rounded-[3.5rem] shadow-xl shadow-blue-900/5 border border-blue-50">
+                        <h3 className="text-gray-400 font-extrabold uppercase tracking-widest mb-6 sm:mb-10 text-base sm:text-xl ml-2">Статус</h3>
 
-                        <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-3 sm:gap-4">
                             {STATUS_OPTIONS.map((opt) => (
                                 <label
                                     key={opt.value}
-                                    className={`cursor-pointer w-full p-2 pr-6 rounded-[2.5rem] transition-all flex items-center justify-between group border-2 ${
+                                    className={`cursor-pointer w-full p-2 pr-4 sm:pr-6 rounded-[1.5rem] sm:rounded-[2.5rem] transition-all flex items-center justify-between group border-2 ${
                                         status === opt.value
                                             ? opt.color
                                             : 'bg-white border-transparent hover:bg-gray-50'
                                     }`}
                                 >
-                                    <div className="flex items-center gap-6">
-                                        <div className={`w-16 h-16 rounded-[2rem] flex items-center justify-center ${
+                                    <div className="flex items-center gap-4 sm:gap-6">
+                                        <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-[2rem] flex items-center justify-center ${
                                             status === opt.value ? 'bg-white/40' : 'bg-gray-100'
                                         }`}>
-                                            <div className={`w-6 h-6 rounded-full ${
+                                            <div className={`w-4 h-4 sm:w-6 sm:h-6 rounded-full ${
                                                 status === opt.value ? 'bg-current' : 'bg-gray-300'
                                             }`} />
                                         </div>
-                                        <span className={`font-bold text-2xl ${
+                                        <span className={`font-bold text-lg sm:text-2xl ${
                                             status === opt.value ? 'text-current' : 'text-gray-500'
                                         }`}>
                                             {opt.label}
@@ -224,18 +224,18 @@ export default function RequestDetailsPage() {
                         </div>
                     </div>
 
-                    <div className="bg-white p-12 rounded-[3.5rem] shadow-sm border border-gray-100">
-                        <h3 className="text-gray-400 font-extrabold uppercase tracking-widest mb-8 text-xl ml-2">Заметка</h3>
+                    <div className="bg-white p-6 sm:p-12 rounded-[2rem] sm:rounded-[3.5rem] shadow-sm border border-gray-100">
+                        <h3 className="text-gray-400 font-extrabold uppercase tracking-widest mb-6 sm:mb-8 text-base sm:text-xl ml-2">Заметка</h3>
                         <textarea
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
-                            className={`${valueClasses} min-h-[250px] resize-none focus:bg-white focus:border-blue-300 focus:outline-none transition-all placeholder:text-gray-300`}
+                            className={`${valueClasses} min-h-[150px] sm:min-h-[250px] resize-none focus:bg-white focus:border-blue-300 focus:outline-none transition-all placeholder:text-gray-300`}
                             placeholder="Комментарий..."
                         />
                         <button
                             onClick={handleSave}
                             disabled={isSaving}
-                            className="w-full mt-8 bg-blue-600 hover:bg-blue-700 text-white py-8 rounded-[3rem] font-bold text-3xl shadow-xl shadow-blue-500/20 transition-transform active:scale-[0.98]"
+                            className="w-full mt-6 sm:mt-8 bg-blue-600 hover:bg-blue-700 text-white py-4 sm:py-8 rounded-[2rem] sm:rounded-[3rem] font-bold text-xl sm:text-3xl shadow-xl shadow-blue-500/20 transition-transform active:scale-[0.98]"
                         >
                             {isSaving ? '...' : 'Сохранить'}
                         </button>
