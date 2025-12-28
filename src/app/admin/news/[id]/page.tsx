@@ -114,7 +114,7 @@ export default function EditNewsPage() {
                     </div>
                 </div>
 
-                <div className="w-1/2 bg-gray-100 rounded-[2.5rem] p-10 flex flex-col items-center justify-center border border-dashed border-gray-300 relative overflow-hidden">
+                <div className="hidden xl:flex w-1/2 bg-gray-100 rounded-[2.5rem] p-10 flex flex-col items-center justify-center border border-dashed border-gray-300 relative overflow-hidden">
                     <div className="absolute top-8 right-8 bg-white px-4 py-2 rounded-full text-xs font-bold text-gray-400 tracking-widest uppercase z-10 shadow-sm">
                         Live Preview
                     </div>

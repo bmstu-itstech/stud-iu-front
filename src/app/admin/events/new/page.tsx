@@ -129,7 +129,7 @@ export default function CreateEventPage() {
                     </div>
                 </div>
 
-                <div className="hidden lg:flex w-1/2 bg-gray-100 rounded-[2.5rem] p-10 items-center justify-center relative border border-dashed border-gray-300">
+                <div className="hidden xl:flex w-1/2 bg-gray-100 rounded-[2.5rem] p-10 items-center justify-center relative border border-dashed border-gray-300">
                     <div className="absolute top-8 right-8 bg-white px-4 py-2 rounded-full text-xs font-bold text-gray-400 tracking-widest uppercase shadow-sm">Live Preview</div>
                     <div className="scale-110 origin-center pointer-events-none">
                         <EventCard

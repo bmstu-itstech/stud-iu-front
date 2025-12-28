@@ -97,7 +97,7 @@ export default function EditPartnerPage() {
                     </div>
                 </div>
 
-                <div className="hidden lg:flex w-1/2 bg-slate-900 rounded-[2.5rem] p-10 flex-col items-center justify-center relative shadow-2xl">
+                <div className="hidden xl:flex w-1/2 bg-slate-900 rounded-[2.5rem] p-10 flex-col items-center justify-center relative shadow-2xl">
                     <div className="absolute top-8 right-8 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-xs font-bold text-white tracking-widest uppercase">PREVIEW</div>
 
                     <div className="w-64 h-64 bg-white rounded-3xl flex items-center justify-center p-8 shadow-2xl">
