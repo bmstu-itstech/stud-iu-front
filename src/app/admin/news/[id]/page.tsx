@@ -84,7 +84,7 @@ export default function EditNewsPage() {
             </div>
 
             <div className="flex flex-1 gap-10 overflow-hidden">
-                <div className="w-1/2 bg-white rounded-[2.5rem] p-10 shadow-sm overflow-y-auto border border-gray-200 flex flex-col gap-8">
+                <div className="w-full xl:w-1/2 bg-white rounded-[2.5rem] p-10 shadow-sm overflow-y-auto border border-gray-200 flex flex-col gap-8">
                     <div className="flex flex-col gap-3">
                         <label className="text-sm font-bold text-gray-400 uppercase tracking-wider ml-1">Заголовок</label>
                         <input
