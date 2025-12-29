@@ -50,7 +50,7 @@ export default function NewsDetailsPage() {
                 />
             </div>
 
-            <div className="flex flex-col gap-6 max-w-5xl mx-auto w-full">
+            <div className="flex flex-col gap-6 max-w-4xl mx-auto w-full">
                 <div className="flex flex-col gap-2">
                     <Caption className="text-gray-400 font-bold uppercase tracking-wider">
                         {formatDate(news.created_at)}

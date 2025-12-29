@@ -3,6 +3,7 @@
 import { type FC, useEffect } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import Link from 'next/link';
 import { Title, Text } from '@/shared/ui/Typography';
 import Button from '@/shared/ui/Button';
 import apiClient from '@/shared/api/axios';
@@ -295,10 +296,19 @@ const JoinModal: FC<JoinModalProps> = ({ isOpen, onClose }) => {
                         </div>
 
                         <div className="flex flex-col gap-4">
-                            <label className="flex items-center gap-4 cursor-pointer">
-                                <input type="checkbox" {...register('agreement', { required: true })} className="w-8 h-8 accent-blue-600 rounded-lg cursor-pointer" />
+                            <label className="flex items-start gap-4 cursor-pointer group">
+                                <input type="checkbox" {...register('agreement', { required: true })} className="w-6 h-6 mt-1 accent-blue-600 rounded-lg cursor-pointer shrink-0" />
                                 <span className="text-gray-500 text-lg font-medium select-none">
-                                    Нажимая кнопку, я даю согласие на обработку моих персональных данных в соответствии с Федеральным законом от 27.07.2006 года №152-ФЗ «О персональных данных».
+                                    Нажимая кнопку, я даю согласие на обработку моих персональных данных в соответствии с
+                                    <Link
+                                        href="/policy"
+                                        target="_blank"
+                                        className="text-blue-600 hover:text-blue-700 underline mx-1.5"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        Политикой конфиденциальности
+                                    </Link>
+                                    и Федеральным законом от 27.07.2006 года №152-ФЗ.
                                 </span>
                             </label>
 
