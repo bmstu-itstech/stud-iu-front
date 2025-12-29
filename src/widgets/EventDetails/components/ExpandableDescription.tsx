@@ -45,7 +45,7 @@ export const ExpandableDescription = ({ text }: Props) => {
                         onClick={() => setIsModalOpen(false)}
                     />
 
-                    <div className="relative bg-white w-full max-w-7xl max-h-[85vh] rounded-[2rem] shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-200">
+                    <div className="relative bg-white w-[90dvw] max-h-[85vh] rounded-[2rem] shadow-2xl overflow-hidden flex flex-col animate-in zoom-in-95 duration-200">
                         <div className="flex justify-between items-center p-8 border-b border-gray-100">
                             <Title level={3} className="text-gray-900">Описание события</Title>
                             <button
