@@ -9,8 +9,14 @@ export default function PolicyPage() {
 
     return (
         <section className="flex flex-col w-[90dvw] mx-auto py-12 pb-24 gap-10">
-            <Button variant="outline" size="sm" onClick={() => router.back()} className="w-fit">
-                ← Назад
+            <Button
+                variant="outline"
+                size="inline"
+                onClick={() => router.back()}
+                className="w-fit border-gray-300 hover:border-black hover:bg-gray-50 transition-colors gap-3"
+            >
+                <span className="text-xl">←</span>
+                <Text level={4} className="font-bold">Назад</Text>
             </Button>
 
             <div className="flex flex-col gap-8">

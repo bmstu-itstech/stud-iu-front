@@ -36,8 +36,14 @@ export default function NewsDetailsPage() {
 
     return (
         <article className="flex flex-col w-full mx-auto px-6 2xl:px-0 max-w-primary py-12 pb-24 gap-10">
-            <Button variant="outline" size="sm" onClick={() => router.back()} className="w-fit">
-                ← Назад
+            <Button
+                variant="outline"
+                size="inline"
+                onClick={() => router.back()}
+                className="w-fit border-gray-300 hover:border-black hover:bg-gray-50 transition-colors gap-3"
+            >
+                <span className="text-xl">←</span>
+                <Text level={4} className="font-bold">Назад</Text>
             </Button>
 
             <div className="w-full aspect-video relative rounded-[2.5rem] overflow-hidden bg-gray-100 shadow-sm">
@@ -50,7 +56,7 @@ export default function NewsDetailsPage() {
                 />
             </div>
 
-            <div className="flex flex-col gap-6 max-w-4xl mx-auto w-full">
+            <div className="flex flex-col gap-6 mx-auto w-full">
                 <div className="flex flex-col gap-2">
                     <Caption className="text-gray-400 font-bold uppercase tracking-wider">
                         {formatDate(news.created_at)}
