@@ -19,6 +19,7 @@ type Inputs = {
     vk_link: string;
     department: string;
     answers: Record<string, any>;
+    agreement: boolean;
 };
 
 const DEPARTMENTS = [
@@ -38,6 +39,7 @@ const JoinModal: FC<JoinModalProps> = ({ isOpen, onClose }) => {
     const { register, handleSubmit, watch, reset } = useForm<Inputs>({
         defaultValues: {
             department: 'SCIENCE',
+            agreement: false
         }
     });
 
@@ -290,10 +292,16 @@ const JoinModal: FC<JoinModalProps> = ({ isOpen, onClose }) => {
                                     </div>
                                 </>
                             )}
-
                         </div>
 
-                        <div className="pt-4 pb-4">
+                        <div className="flex flex-col gap-4">
+                            <label className="flex items-center gap-4 cursor-pointer">
+                                <input type="checkbox" {...register('agreement', { required: true })} className="w-8 h-8 accent-blue-600 rounded-lg cursor-pointer" />
+                                <span className="text-gray-500 text-lg font-medium select-none">
+                                    Нажимая кнопку, я даю согласие на обработку моих персональных данных в соответствии с Федеральным законом от 27.07.2006 года №152-ФЗ «О персональных данных».
+                                </span>
+                            </label>
+
                             <Button variant="blue" size="full" type="submit" className="text-3xl py-8 rounded-[2.5rem] shadow-xl shadow-blue-500/20 hover:scale-[1.01] active:scale-[0.99] transition-transform">
                                 <span className="font-bold">Отправить анкету</span>
                             </Button>

@@ -67,9 +67,9 @@ export default function CreateEventPage() {
             await createEvent(formData);
             toast.success('Событие создано');
             router.push('/admin/events');
-        } catch (e: unknown) {
+        } catch (e: any) {
             console.error(e);
-            toast.error('Не удалось создать событие');
+            toast.error(e.response?.data?.error || 'Не удалось создать событие');
         } finally {
             setIsSubmitting(false);
         }
@@ -103,7 +103,21 @@ export default function CreateEventPage() {
                     <textarea {...register('description')} className="p-6 bg-gray-50 rounded-2xl text-lg min-h-[140px] focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none" placeholder="Описание события..." />
 
                     <div className="flex flex-col sm:flex-row gap-6">
-                        <input type="datetime-local" {...register('start_datetime', { required: 'Выберите дату' })} className="w-full sm:flex-1 p-6 bg-gray-50 rounded-2xl text-lg font-medium outline-none" />
+                        <input
+                            type="datetime-local"
+                            max="9999-12-31T23:59"
+                            {...register('start_datetime', {
+                                required: 'Выберите дату',
+                                validate: (value) => {
+                                    const date = new Date(value);
+                                    if (wType === 'FUTURE' && date < new Date()) {
+                                        return 'Предстоящее событие не может быть в прошлом!';
+                                    }
+                                    return true;
+                                }
+                            })}
+                            className="w-full sm:flex-1 p-6 bg-gray-50 rounded-2xl text-lg font-medium outline-none"
+                        />
                         <div className="relative w-full sm:w-24 h-16 sm:h-auto">
                             <input type="color" {...register('color')} className="w-full h-full p-2 bg-gray-50 rounded-2xl cursor-pointer" />
                         </div>

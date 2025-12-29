@@ -7,7 +7,7 @@ import { usePartners } from '@/shared/hooks/usePartners';
 import { Text, Title } from '@/shared/ui/Typography';
 import Contact from './components/Contact';
 import contacts from './contacts';
-import {getImageUrl} from "@/shared/utils/getImageUrl";
+import { getImageUrl } from "@/shared/utils/getImageUrl";
 
 const Additional: FC = () => {
     const { data: partners, isLoading, isError } = usePartners(12);
@@ -36,17 +36,29 @@ const Additional: FC = () => {
                                 </Text>
                             </div>
                         ) : (
-                            partners?.map((partner) => (
-                                <div key={partner.id} className="w-40 h-40 bg-white rounded-xl flex items-center justify-center flex-shrink-0 p-4 hover:scale-105 transition-transform">
-                                    <Image
-                                        width={120}
-                                        height={120}
-                                        src={getImageUrl(partner.image)}
-                                        alt={partner.name}
-                                        className="object-contain w-full h-full"
-                                    />
-                                </div>
-                            ))
+                            partners?.map((partner) => {
+                                const Content = (
+                                    <div className="w-40 h-40 bg-white rounded-xl flex items-center justify-center flex-shrink-0 p-4 hover:scale-105 transition-transform cursor-pointer">
+                                        <Image
+                                            width={120}
+                                            height={120}
+                                            src={getImageUrl(partner.image)}
+                                            alt={partner.name}
+                                            className="object-contain w-full h-full"
+                                        />
+                                    </div>
+                                );
+
+                                if (partner.url) {
+                                    return (
+                                        <a key={partner.id} href={partner.url} target="_blank" rel="noopener noreferrer">
+                                            {Content}
+                                        </a>
+                                    );
+                                }
+
+                                return <div key={partner.id}>{Content}</div>;
+                            })
                         )}
                     </div>
                 </div>

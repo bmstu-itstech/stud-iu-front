@@ -27,6 +27,10 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Некорректный формат даты' }, { status: 400 });
         }
 
+        if (type === 'FUTURE' && start_datetime < new Date()) {
+            return NextResponse.json({ error: 'Предстоящее событие не может быть в прошлом' }, { status: 400 });
+        }
+
         const endDatetimeStr = formData.get('end_datetime') as string;
         const end_datetime = endDatetimeStr ? new Date(endDatetimeStr) : null;
 
@@ -49,7 +53,7 @@ export async function POST(req: NextRequest) {
                 album_link: (type === 'PAST' && album_link) ? album_link : null,
             }
         });
-        
+
         for (const file of images) {
             if (file && file.size > 0) {
                 const path = await saveFile(file, 'events');

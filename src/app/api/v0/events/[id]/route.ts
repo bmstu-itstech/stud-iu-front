@@ -44,6 +44,12 @@ export async function PUT(req: NextRequest, { params }: Props) {
         const color = formData.get('color') as string;
         const startDatetimeStr = formData.get('start_datetime') as string;
 
+        const start_datetime = new Date(startDatetimeStr);
+
+        if (type === 'FUTURE' && start_datetime < new Date()) {
+            return NextResponse.json({ error: 'Предстоящее событие не может быть в прошлом' }, { status: 400 });
+        }
+
         const registration_link = formData.get('registration_link') as string;
         const album_link = formData.get('album_link') as string;
 
@@ -57,7 +63,7 @@ export async function PUT(req: NextRequest, { params }: Props) {
                 description,
                 place,
                 color,
-                start_datetime: new Date(startDatetimeStr),
+                start_datetime,
                 registration_link: (type === 'FUTURE' && registration_link) ? registration_link : null,
                 album_link: (type === 'PAST' && album_link) ? album_link : null,
             }
