@@ -56,7 +56,7 @@ const Footer: FC = () => {
 
                     <div className="flex gap-4 items-center opacity-60 hover:opacity-100 transition-opacity">
                         <Image src="/icons/itstech_logo.svg" alt="ITS Tech" width={40} height={40} />
-                        <Text level={3}>Сделано в ИТС ТЕХ</Text>
+                        <Text level={3}>Сделано в ITS TECH</Text>
                     </div>
                 </div>
             </div>

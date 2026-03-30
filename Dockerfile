@@ -6,10 +6,12 @@ FROM base AS deps
 COPY package.json bun.lock* ./
 RUN bun install --frozen-lockfile
 COPY prisma ./prisma
+COPY scripts ./scripts
 
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/scripts ./scripts
 COPY . .
 
 RUN bunx prisma generate
@@ -31,6 +33,7 @@ RUN groupadd --system --gid 1001 nodejs && \
     useradd --system --uid 1001 --no-log-init -g nodejs nextjs
 
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/scripts ./scripts
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 

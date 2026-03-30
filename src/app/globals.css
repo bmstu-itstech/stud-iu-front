@@ -31,6 +31,10 @@
     body {
         @apply bg-white text-black min-h-dvh antialiased;
     }
+    html {
+        scroll-padding-top: 6.5rem;
+        scroll-behavior: smooth;
+    }
 }
 
 html {

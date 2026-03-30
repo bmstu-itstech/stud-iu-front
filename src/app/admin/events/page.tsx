@@ -63,12 +63,9 @@ export default async function EventsListPage() {
                                         </div>
                                     </td>
                                     <td className="px-8 py-6 sm:px-12 sm:py-8 align-middle whitespace-nowrap">
-                                        <Text className="font-bold text-gray-900 !text-xl sm:!text-2xl">
-                                            {formatDate(event.start_datetime).split(',')[0]}
+                                        <Text className="font-bold text-gray-900 !text-xl sm:!text-2xl whitespace-pre-wrap">
+                                            {formatDate(event.start_datetime, event.end_datetime, event.precision)}
                                         </Text>
-                                        <div className="text-gray-500 text-base sm:text-lg mt-2 font-medium">
-                                            {formatDate(event.start_datetime).split(',')[1]}
-                                        </div>
                                     </td>
                                     <td className="px-8 py-6 sm:px-12 sm:py-8 align-middle">
                                         <div className="flex items-center gap-5">

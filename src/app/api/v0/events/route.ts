@@ -17,21 +17,31 @@ export async function POST(req: NextRequest) {
         const description = formData.get('description') as string;
         const place = formData.get('place') as string;
         const color = formData.get('color') as string;
+        const precisionStr = formData.get('precision') as string || 'time';
+        const precision = precisionStr as Precision;
 
-        const startDatetimeStr = formData.get('start_datetime') as string;
+        let startDatetimeStr = formData.get('start_datetime') as string;
         if (!startDatetimeStr) {
             return NextResponse.json({ error: 'Не указана дата начала' }, { status: 400 });
         }
+        
+        if (precision === 'month' && /^\d{4}-\d{2}$/.test(startDatetimeStr)) startDatetimeStr += '-01T00:00';
+        else if (precision === 'year' && /^\d{4}$/.test(startDatetimeStr)) startDatetimeStr += '-01-01T00:00';
+
         const start_datetime = new Date(startDatetimeStr);
         if (isNaN(start_datetime.getTime())) {
             return NextResponse.json({ error: 'Некорректный формат даты' }, { status: 400 });
         }
 
-        if (type === 'FUTURE' && start_datetime < new Date()) {
+        if (type === 'FUTURE' && start_datetime < new Date() && precision === 'time') {
             return NextResponse.json({ error: 'Предстоящее событие не может быть в прошлом' }, { status: 400 });
         }
 
-        const endDatetimeStr = formData.get('end_datetime') as string;
+        let endDatetimeStr = formData.get('end_datetime') as string;
+        if (endDatetimeStr) {
+            if (precision === 'month' && /^\d{4}-\d{2}$/.test(endDatetimeStr)) endDatetimeStr += '-01T00:00';
+            else if (precision === 'year' && /^\d{4}$/.test(endDatetimeStr)) endDatetimeStr += '-01-01T00:00';
+        }
         const end_datetime = endDatetimeStr ? new Date(endDatetimeStr) : null;
 
         const registration_link = formData.get('registration_link') as string;
@@ -46,7 +56,7 @@ export async function POST(req: NextRequest) {
                 description,
                 place,
                 color,
-                precision: Precision.time,
+                precision,
                 start_datetime,
                 end_datetime,
                 registration_link: (type === 'FUTURE' && registration_link) ? registration_link : null,

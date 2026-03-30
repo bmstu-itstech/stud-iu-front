@@ -68,9 +68,11 @@ const Additional: FC = () => {
                         Контакты
                     </Title>
 
-                    <div className="flex flex-col lg:flex-row justify-between items-center gap-16 w-full max-w-[1600px] mx-auto">
+                    <div className="flex overflow-x-auto lg:overflow-x-visible lg:flex-row lg:justify-between items-center gap-8 lg:gap-16 w-full max-w-[1600px] mx-auto pb-4 px-4 sm:px-0 snap-x snap-mandatory scrollbar-hide">
                         {contacts.map((contact) => (
-                            <Contact {...contact} key={contact.name} />
+                            <div key={contact.name} className="snap-center shrink-0">
+                                <Contact {...contact} />
+                            </div>
                         ))}
                     </div>
                 </div>

@@ -4,10 +4,12 @@ import { useFutureEvents, usePastEvents } from '@/shared/hooks/useEvents';
 import EventCard from '@/sections/Events/components/EventCard';
 import { EventCardSkeleton } from '@/sections/Events/components/EventCardSkeleton';
 import { Text, Title } from '@/shared/ui/Typography';
+import { useHorizontalScroll } from '@/shared/utils';
 
 export default function EventsPage() {
     const { data: futureEvents, isLoading: isFutureLoading, isError: isFutureError } = useFutureEvents(10);
     const { data: pastEvents, isLoading: isPastLoading, isError: isPastError } = usePastEvents(6);
+    const scrollRef = useHorizontalScroll();
 
     return (
         <>
@@ -17,7 +19,7 @@ export default function EventsPage() {
                     <Text level={2} className="text-gray-500">Регистрируйтесь на наши новые мероприятия</Text>
                 </div>
 
-                <div className="flex items-stretch gap-6 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory min-h-[150px]">
+                <div ref={scrollRef} className="flex items-stretch gap-6 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory min-h-[150px]">
                     {isFutureLoading ? (
                         Array.from({ length: 4 }).map((_, i) => (
                             <div key={i} className="flex-shrink-0 snap-start"><EventCardSkeleton mode="compact" /></div>

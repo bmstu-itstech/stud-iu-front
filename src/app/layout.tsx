@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import { Providers } from './providers';
 import { SecretLoginListener } from '@/features/SecretLoginListener';
 import { ModalProvider } from '@/shared/context/ModalContext';
+import { HashScrollFix } from '@/features/HashScrollFix';
 
 const alsSector = localFont({
     variable: '--font-als-sector',
@@ -37,6 +38,7 @@ export default function RootLayout({
         <body className={`antialiased ${alsSector.className} bg-gray-50`}>
         <Providers>
             <ModalProvider>
+                <HashScrollFix />
                 <SecretLoginListener />
                 {children}
             </ModalProvider>
