@@ -13,9 +13,14 @@ import links from './links';
 const Navbar: FC = () => {
     const { openJoinModal } = useModal();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    
     const pathname = usePathname();
+    const [prevPathname, setPrevPathname] = useState(pathname);
 
-    useEffect(() => setIsMobileMenuOpen(false), [pathname]);
+    if (pathname !== prevPathname) {
+        setPrevPathname(pathname);
+        setIsMobileMenuOpen(false);
+    }
 
     useEffect(() => {
         if (isMobileMenuOpen) {
