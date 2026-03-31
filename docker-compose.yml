@@ -1,36 +1,65 @@
-version: '3.8'
-
 services:
   app:
-    container_name: stud_iu_front
+    container_name: studiu_next
     build:
       context: .
-      dockerfile: Dockerfile
+    image: nextjs-prod
     restart: always
     ports:
       - "3000:3000"
     env_file:
       - .env
-    environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?schema=public
     depends_on:
-      db:
+      postgres:
         condition: service_healthy
+      prisma-migrator:
+        condition: service_completed_successfully
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public"
+    networks:
+      - localnet
     volumes:
-      - ./uploads_data:/app/storage
-  db:
-    container_name: stud_iu_postgres
-    image: postgres:15-alpine
-    restart: always
+      - ${UPLOADS:-./uploads}:/app/storage
+  postgres:
+    container_name: studiu_postgres
+    image: postgres:15
     env_file:
       - .env
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - localnet
+    restart: always
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
-      timeout: 5s
-      retries: 5
+      timeout: 2s
+      retries: 20
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: postgres -c listen_addresses='*'
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+  prisma-migrator:
+    container_name: studiu_migrator
+    build:
+      context: .
+      target: builder
+    command: bunx prisma migrate deploy
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public"
+    networks:
+      - localnet
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+networks:
+  localnet:
+    driver: bridge
 
 volumes:
   postgres_data:

@@ -6,28 +6,35 @@ export default function useHorizontalScroll() {
 
     useEffect(() => {
         const el = elRef.current;
-        if (el) {
-            const onWheel = (e: WheelEvent) => {
-                if (e.deltaY === 0) return;
+        if (!el) return;
 
-                if (
-                    (el.scrollLeft === 0 && e.deltaY < 0) ||
-                    (Math.abs(el.scrollLeft + el.clientWidth - el.scrollWidth) < 1 && e.deltaY > 0)
-                ) {
-                    return;
-                }
+        const isTouch = window.matchMedia('(pointer: coarse)').matches;
+        if (isTouch) return;
 
-                e.preventDefault();
-                el.scrollTo({
-                    left: el.scrollLeft + e.deltaY,
-                    behavior: 'auto'
-                });
-            };
+        const onWheel = (e: WheelEvent) => {
+            if (e.deltaY === 0 || e.shiftKey) return;
 
-            el.addEventListener('wheel', onWheel, { passive: false });
-            return () => el.removeEventListener('wheel', onWheel);
-        }
+            const isAtLeft = el.scrollLeft <= 0;
+            const isAtRight = Math.abs(el.scrollLeft + el.clientWidth - el.scrollWidth) <= 1;
+
+            if ((isAtLeft && e.deltaY < 0) || (isAtRight && e.deltaY > 0)) {
+                return;
+            }
+
+            e.preventDefault();
+            
+            el.scrollBy({
+                left: e.deltaY > 0 ? 350 : -350,
+                behavior: 'smooth'
+            });
+        };
+
+        el.addEventListener('wheel', onWheel, { passive: false });
+        
+        return () => {
+            el.removeEventListener('wheel', onWheel);
+        };
     }, []);
-
+    
     return elRef;
 }

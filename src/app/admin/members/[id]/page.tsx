@@ -31,6 +31,7 @@ export default function EditMemberPage() {
 
     const watchedName = watch('name');
     const watchedPos = watch('position');
+    const watchedTg = watch('telegram_link');
 
     useEffect(() => {
         if (!memberId) return;
@@ -125,11 +126,12 @@ export default function EditMemberPage() {
                 <div className="hidden xl:flex w-1/2 bg-gradient-to-b from-gray-900 to-blue-900 rounded-[2.5rem] p-10 items-center justify-center relative shadow-2xl">
                     <div className="absolute top-8 right-8 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-white tracking-widest uppercase">PREVIEW</div>
 
-                    <div className="scale-125">
+                    <div className="scale-125 pointer-events-none">
                         <Contact
                             name={watchedName || 'Имя Фамилия'}
                             role={watchedPos || 'Должность'}
                             avatarUrl={previewImage || '/placeholder.png'}
+                            tg_link={watchedTg || '#'}
                         />
                     </div>
                 </div>

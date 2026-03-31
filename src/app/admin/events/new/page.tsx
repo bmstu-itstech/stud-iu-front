@@ -16,7 +16,9 @@ interface EventForm {
     description: string;
     place: string;
     color: string;
+    precision: string;
     start_datetime: string;
+    end_datetime: string;
     registration_link: string;
     album_link: string;
     images: FileList;
@@ -25,16 +27,22 @@ interface EventForm {
 export default function CreateEventPage() {
     const router = useRouter();
     const { register, handleSubmit, watch } = useForm<EventForm>({
-        defaultValues: { type: 'FUTURE', color: '#3a7fff' }
+        defaultValues: { type: 'FUTURE', color: '#3a7fff', precision: 'time' }
     });
-    const [previewImage, setPreviewImage] = useState<string | null>(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const[previewImage, setPreviewImage] = useState<string | null>(null);
+    const[isSubmitting, setIsSubmitting] = useState(false);
 
     const wType = watch('type');
     const wName = watch('name');
     const wDesc = watch('description');
     const wColor = watch('color');
     const wDate = watch('start_datetime');
+    const wPrecision = watch('precision') || 'time';
+
+    let dateInputType = 'datetime-local';
+    if (wPrecision === 'month') dateInputType = 'month';
+    else if (wPrecision === 'day') dateInputType = 'date';
+    else if (wPrecision === 'year') dateInputType = 'number';
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -50,7 +58,12 @@ export default function CreateEventPage() {
         formData.append('description', data.description || '');
         formData.append('place', data.place || '');
         formData.append('color', data.color);
+        formData.append('precision', data.precision || 'time');
         formData.append('start_datetime', data.start_datetime);
+        
+        if (data.end_datetime) {
+            formData.append('end_datetime', data.end_datetime);
+        }
 
         if (data.type === 'FUTURE' && data.registration_link) {
             formData.append('registration_link', data.registration_link);
@@ -67,9 +80,9 @@ export default function CreateEventPage() {
             await createEvent(formData);
             toast.success('Событие создано');
             router.push('/admin/events');
-        } catch (e: unknown) {
+        } catch (e: any) {
             console.error(e);
-            toast.error('Не удалось создать событие');
+            toast.error(e.response?.data?.error || 'Не удалось создать событие');
         } finally {
             setIsSubmitting(false);
         }
@@ -102,14 +115,38 @@ export default function CreateEventPage() {
                     <input {...register('name', { required: 'Введите название' })} className="p-6 bg-gray-50 rounded-2xl text-xl font-bold placeholder:font-normal focus:ring-2 focus:ring-blue-500/20 outline-none transition-all" placeholder="Название события" />
                     <textarea {...register('description')} className="p-6 bg-gray-50 rounded-2xl text-lg min-h-[140px] focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none" placeholder="Описание события..." />
 
+                    <div className="flex flex-col gap-4 bg-gray-50 p-6 rounded-2xl">
+                        <div className="flex items-center gap-4">
+                            <span className="font-bold text-gray-500 text-sm uppercase tracking-wider">Формат даты:</span>
+                            <select {...register('precision')} className="flex-1 p-3 bg-white border border-gray-200 rounded-xl font-medium outline-none">
+                                <option value="time">Точное время</option>
+                                <option value="day">Только день</option>
+                                <option value="month">Только месяц</option>
+                                <option value="year">Только год</option>
+                            </select>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <input
+                                type={dateInputType}
+                                placeholder={wPrecision === 'year' ? 'Год (напр. 2026)' : ''}
+                                {...register('start_datetime', { required: 'Выберите дату' })}
+                                className="w-full sm:flex-1 p-4 bg-white border border-gray-200 rounded-xl text-lg font-medium outline-none"
+                            />
+                            <input
+                                type={dateInputType}
+                                placeholder={wPrecision === 'year' ? 'Конец: Год (напр. 2027)' : 'Конец (опционально)'}
+                                {...register('end_datetime')}
+                                className="w-full sm:flex-1 p-4 bg-white border border-gray-200 rounded-xl text-lg font-medium outline-none placeholder:text-gray-400"
+                            />
+                        </div>
+                    </div>
+
                     <div className="flex flex-col sm:flex-row gap-6">
-                        <input type="datetime-local" {...register('start_datetime', { required: 'Выберите дату' })} className="w-full sm:flex-1 p-6 bg-gray-50 rounded-2xl text-lg font-medium outline-none" />
+                        <input {...register('place')} className="w-full sm:flex-1 p-6 bg-gray-50 rounded-2xl text-lg font-medium outline-none" placeholder="Место проведения" />
                         <div className="relative w-full sm:w-24 h-16 sm:h-auto">
                             <input type="color" {...register('color')} className="w-full h-full p-2 bg-gray-50 rounded-2xl cursor-pointer" />
                         </div>
                     </div>
-
-                    <input {...register('place')} className="p-6 bg-gray-50 rounded-2xl text-lg font-medium outline-none" placeholder="Место проведения" />
 
                     {wType === 'FUTURE' ? (
                         <input {...register('registration_link')} className="p-6 bg-blue-50/50 text-blue-800 rounded-2xl text-lg font-medium outline-none border border-blue-100 placeholder:text-blue-300" placeholder="Ссылка на регистрацию" />
@@ -121,9 +158,7 @@ export default function CreateEventPage() {
                         <label className="block text-gray-400 font-bold mb-2 uppercase text-xs tracking-wider">Обложка</label>
                         <input
                             type="file"
-                            {...register('images', {
-                                onChange: (e) => handleImageChange(e)
-                            })}
+                            {...register('images', { onChange: (e) => handleImageChange(e) })}
                             className="block w-full text-lg text-gray-500 file:mr-6 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-base file:font-bold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 transition-all cursor-pointer"
                         />
                     </div>
@@ -138,7 +173,7 @@ export default function CreateEventPage() {
                             description={wDesc || 'Описание события...'}
                             color={wColor}
                             start_datetime={wDate || new Date().toISOString()}
-                            images={previewImage ? [{ id: 0, image: previewImage }] : []}
+                            images={previewImage ? [{ id: 0, image: previewImage }] :[]}
                             place=""
                             date_range=""
                             mode="full"

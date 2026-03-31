@@ -21,6 +21,7 @@ export interface FutureEvent {
     end_datetime?: string | null;
     registration_link?: string | null;
     color?: string;
+    precision?: string;
 }
 
 export interface PastEvent {
@@ -34,6 +35,7 @@ export interface PastEvent {
     album_link?: string | null;
     report_link?: string | null;
     color: string;
+    precision?: string;
 }
 
 export interface News {

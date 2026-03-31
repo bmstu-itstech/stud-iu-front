@@ -10,7 +10,7 @@ const Card: FC<CardProps> = (props) => {
     const isExternal = props.href.startsWith('http');
 
     return (
-        <div className="bg-blue-primary rounded-3xl p-8 min-w-[280px] sm:min-w-[300px] flex flex-col justify-between h-[320px] snap-center">
+        <div className="bg-blue-primary rounded-3xl p-8 min-w-[280px] sm:min-w-[300px] flex flex-col justify-between snap-center">
             <div className="flex flex-col gap-4">
                 <Title level={3} className="text-white">
                     {props.title}

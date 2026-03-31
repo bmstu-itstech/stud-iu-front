@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import type { FC } from 'react';
 
 import { Caption, Text, Title } from '@/shared/ui/Typography';
@@ -15,12 +16,12 @@ const NewsCard: FC<Props> = ({ mode = 'default', ...props }) => {
     const isPreview = mode === 'preview';
     const imageUrl = getImageUrl(props.cover_url);
 
-    return (
+    const CardContent = (
         <div
             className={cn(
                 "flex flex-col gap-5 w-full group cursor-pointer h-full",
                 isPreview
-                    ? "max-w-[380px] mx-auto bg-white rounded-[2rem] shadow-sm p-5"
+                    ? "max-w-[380px] mx-auto bg-white rounded-[2rem] shadow-sm p-5 pointer-events-none"
                     : "w-full"
             )}
         >
@@ -41,7 +42,7 @@ const NewsCard: FC<Props> = ({ mode = 'default', ...props }) => {
 
             <div className="flex flex-col gap-3 px-1">
                 <div className="flex justify-between items-start gap-4">
-                    <Title level={4} className="leading-tight line-clamp-2 font-bold">
+                    <Title level={4} className="leading-tight line-clamp-2 font-bold group-hover:text-blue-600 transition-colors">
                         {props.title}
                     </Title>
                     <Caption level={2} className="text-gray-400 whitespace-nowrap pt-1">
@@ -54,6 +55,14 @@ const NewsCard: FC<Props> = ({ mode = 'default', ...props }) => {
                 </Text>
             </div>
         </div>
+    );
+
+    if (isPreview) return CardContent;
+
+    return (
+        <Link href={`/news/${props.id}`}>
+            {CardContent}
+        </Link>
     );
 };
 
