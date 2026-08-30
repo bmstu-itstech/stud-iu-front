@@ -1,0 +1,120 @@
+.footer {
+  background: var(--color-dark);
+  color: var(--color-white);
+  padding: 24px 0 36px;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(238, 240, 243, 0.2);
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.socials a {
+  display: inline-flex;
+  transition: opacity 0.15s ease;
+}
+
+.socials a:hover {
+  opacity: 0.8;
+}
+
+.fields {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 0;
+  margin: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.fieldLabel {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.fieldValue {
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.madeBy {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.madeByText {
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (min-width: 769px) {
+  .field:last-child {
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+
+@media (max-width: 768px) {
+  .top {
+    gap: 16px;
+  }
+
+  .fields {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    align-self: stretch;
+  }
+}

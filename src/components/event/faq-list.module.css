@@ -1,0 +1,35 @@
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  padding: 14px 0;
+  border-top: 1px solid var(--color-gray-light);
+}
+
+.item:last-child {
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: left;
+  color: var(--color-faq-question);
+}
+
+.answer {
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(36, 36, 36, 0.7);
+}

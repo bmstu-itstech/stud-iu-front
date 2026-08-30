@@ -1,0 +1,109 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  margin: 0 -12px;
+  padding: 0 12px;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  flex-shrink: 0;
+  scroll-snap-align: center;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 327px;
+  height: 180px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  color: var(--color-white);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageFallback {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-band);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.place {
+  font-weight: 700;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-gray-light);
+}
+
+.indicatorActive {
+  background: var(--color-primary);
+}
+
+@media (min-width: 769px) {
+  .root {
+    display: none;
+  }
+}

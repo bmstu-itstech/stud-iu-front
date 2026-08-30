@@ -1,0 +1,36 @@
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 300px;
+  height: 36px;
+  padding: 0 8px;
+  background: var(--color-gray-light);
+  border-radius: 10px;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: rgba(60, 60, 67, 0.6);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-dark);
+  outline: none;
+}
+
+.input::placeholder {
+  color: rgba(60, 60, 67, 0.6);
+}
+
+.input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}

@@ -1,0 +1,11 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.image {
+  display: block;
+  width: auto;
+  height: 48px;
+}

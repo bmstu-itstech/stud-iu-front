@@ -1,0 +1,35 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 176px;
+  padding: 16px;
+  background: var(--color-primary);
+  border-radius: var(--radius-card);
+  color: var(--color-white);
+}
+
+.value {
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+.label {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.ctaWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .value {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}

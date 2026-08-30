@@ -1,0 +1,197 @@
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.requiredStar {
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 56px;
+  padding: 0 16px;
+  background: var(--color-white);
+  border: 1px solid var(--color-scrollbar-thumb);
+  border-radius: var(--radius-card);
+  font-size: 16px;
+  line-height: 20px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field:focus-within {
+  border-color: var(--color-placeholder);
+}
+
+.field:hover {
+  border-color: var(--color-placeholder);
+}
+
+.fieldError {
+  border-color: #e5484d;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font: inherit;
+  color: var(--color-dark);
+}
+
+.input::placeholder {
+  color: var(--color-placeholder);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-dark);
+  cursor: pointer;
+}
+
+.toggle:hover {
+  color: var(--color-primary);
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 12px;
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: 0 8px 24px rgba(31, 47, 84, 0.15);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.navButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--color-dark);
+}
+
+.navButton:hover {
+  background: var(--color-gray-light);
+}
+
+.selectWrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.yearWrap {
+  flex: 0 0 96px;
+}
+
+.select {
+  width: 100%;
+  height: 28px;
+  padding: 0 26px 0 10px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-gray-light);
+  font-size: 14px;
+  line-height: 1;
+  color: var(--color-dark);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.selectChevron {
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--color-dark);
+}
+
+.weekdays,
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.weekday {
+  padding: 4px 0;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: var(--color-placeholder);
+}
+
+.day {
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--color-dark);
+}
+
+.day:hover:not(:disabled) {
+  background: var(--color-gray-light);
+}
+
+.dayMuted {
+  color: var(--color-scrollbar-thumb);
+  cursor: default;
+}
+
+.dayToday {
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+.daySelected,
+.daySelected:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.error {
+  font-size: 14px;
+  line-height: 20px;
+  color: #e5484d;
+}

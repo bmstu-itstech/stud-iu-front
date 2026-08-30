@@ -1,0 +1,73 @@
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 24px 12px 64px;
+}
+
+.formCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 800px;
+  padding: 34px 12px;
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+}
+
+.successBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.successIcon {
+  margin-bottom: 8px;
+  animation: successPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes successPop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .successIcon {
+    animation: none;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.error {
+  font-size: 14px;
+  line-height: 20px;
+  color: #e5484d;
+  margin-top: -6px;
+}
+
+.successText {
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+}

@@ -1,0 +1,166 @@
+.page {
+  padding: 12px 0 64px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-muted);
+  transition: color 0.15s ease;
+}
+
+.back:hover {
+  color: var(--color-primary);
+}
+
+.layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding-top: 12px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  min-width: 0;
+}
+
+.shortDescription {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 20px;
+  white-space: pre-line;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.galleryItem {
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background: none;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.galleryItem:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.galleryImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 348 / 179;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.galleryItem:hover .galleryImage,
+.galleryItem:focus-visible .galleryImage {
+  transform: scale(1.03);
+}
+
+.albumLink {
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-primary);
+}
+
+.albumLink:hover {
+  text-decoration: underline;
+}
+
+.registrationLinkCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: flex-start;
+  width: 100%;
+  max-width: 349px;
+  padding: 12px;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-card);
+}
+
+.registrationLinkTitle {
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.registrationLinkRow {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 0;
+  border-bottom: 2px dashed var(--color-gray-light);
+}
+
+.registrationLinkLabel {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-muted);
+}
+
+.registrationLinkValue {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.speakers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.link {
+  color: var(--color-primary);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .main {
+    max-width: none;
+  }
+
+  .speakers {
+    grid-template-columns: 1fr;
+  }
+
+  .registrationLinkCard {
+    align-self: stretch;
+    max-width: none;
+  }
+}

@@ -1,0 +1,92 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: flex-start;
+  position: sticky;
+  top: 24px;
+  width: 100%;
+  max-width: 349px;
+  padding: 12px;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-card);
+}
+
+.title {
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 0;
+  border-bottom: 2px dashed var(--color-gray-light);
+}
+
+.rowLabel {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-muted);
+}
+
+.rowValue {
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.seats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.seatsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progress {
+  width: 100%;
+  height: 6px;
+  background: var(--color-gray-light);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-success);
+  border-radius: 12px;
+}
+
+.success {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-success);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .card {
+    position: static;
+    max-width: none;
+  }
+}

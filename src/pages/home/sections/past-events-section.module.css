@@ -1,0 +1,33 @@
+.section {
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 24px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 12px;
+    margin: 16px -12px 0;
+    padding: 0 12px;
+  }
+
+  .grid > a {
+    flex: 0 0 327px;
+    scroll-snap-align: center;
+  }
+}
