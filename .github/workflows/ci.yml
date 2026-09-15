@@ -94,6 +94,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production
+    needs:
+      - lint
+      - typecheck
+      - unit
+      - build
+      - e2e
     steps:
       - name: Deploy to production
         uses: appleboy/ssh-action@v1.0.3
