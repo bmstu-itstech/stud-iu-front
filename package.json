@@ -1,9 +1,9 @@
 {
   "name": "studiu-front",
   "private": true,
-  "version": "0.1.0",
+  "version": "2.0.1",
   "type": "module",
-  "description": "Сайт Студенческого совета факультета ИУ МГТУ им. Н.Э. Баумана (мок-реализация по макету Figma «СтудИУ»)",
+  "description": "Сайт Студенческого совета факультета ИУ МГТУ им. Н.Э. Баумана",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

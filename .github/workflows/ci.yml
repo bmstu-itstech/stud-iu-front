@@ -90,3 +90,25 @@ jobs:
             test-results/
           retention-days: 7
           if-no-files-found: ignore
+
+    deploy:
+      runs-on: ubuntu-latest
+      environment: production
+      steps:
+        - name: Deploy to production
+          uses: appleboy/ssh-action@v1.0.3
+          with:
+            host: ${{ vars.SSH_HOST }}
+            port: ${{ vars.SSH_PORT }}
+            username: ${{ vars.SSH_USER }}
+            key: ${{ secrets.SSH_KEY }}
+            script_stop: true
+            script: |
+              cd ${{ vars.PROJECT_DIR }}
+              git stash
+              git checkout main
+              git pull origin main
+              docker build -t stud-iu-front .
+              docker create --name stud-iu-front stud-iu-front nop
+              docker cp stud-iu-front:/dist ${{ vars.DIST_DIR }}
+              docker container rm stud-iu-front
