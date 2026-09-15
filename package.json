@@ -1,7 +1,7 @@
 {
   "name": "studiu-front",
   "private": true,
-  "version": "2.0.1",
+  "version": "2.0.2",
   "type": "module",
   "description": "Сайт Студенческого совета факультета ИУ МГТУ им. Н.Э. Баумана",
   "scripts": {
