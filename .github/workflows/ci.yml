@@ -100,6 +100,7 @@ jobs:
       - unit
       - build
       - e2e
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - name: Deploy to production
         uses: appleboy/ssh-action@v1.0.3
