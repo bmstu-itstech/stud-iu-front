@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
-
 import { Layout } from '@/components/layout/Layout'
+import { DirectionPage } from '@/pages/directions/DirectionPage'
 import { EventPage } from '@/pages/event/EventPage'
 import { HomePage } from '@/pages/home/HomePage'
 import { JoinPage } from '@/pages/join/JoinPage'
@@ -13,6 +13,7 @@ export function AppRoutes() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/directions/:slug" element={<DirectionPage />} />
         <Route path="/events/past" element={<PastEventsPage />} />
         <Route path="/events/:id" element={<EventPage />} />
         <Route path="/news/:id" element={<NewsPage />} />

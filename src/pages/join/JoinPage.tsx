@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
+import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button/Button'
@@ -17,6 +18,8 @@ type FormValues = Record<string, FieldValue>
 type FieldErrors = Record<string, string | undefined>
 
 const CONSENT_KEY = 'consent'
+const CATEGORIES_FIELD_KEY = 'categories'
+const DIRECTION_QUERY_KEY = 'direction'
 const CONSENT_ERROR = 'Подтвердите согласие на обработку персональных данных'
 const MULTI_REQUIRED_ERROR = 'Выберите хотя бы один вариант'
 const BAD_URL_ERROR = 'Некорректная ссылка'
@@ -65,6 +68,7 @@ function validate(fields: FormField[], values: FormValues, consent: boolean): Fi
 
 export const JoinPage = observer(function JoinPage() {
   const { applications } = stores
+  const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
     void applications.loadSchema()
@@ -80,6 +84,22 @@ export const JoinPage = observer(function JoinPage() {
   }, [submitted])
 
   const fields = applications.schema
+
+  useEffect(() => {
+    if (fields === null) return
+    const direction = searchParams.get(DIRECTION_QUERY_KEY)
+    if (direction === null) return
+
+    const categoriesField = fields.find((field) => field.key === CATEGORIES_FIELD_KEY)
+    const optionExists =
+      categoriesField !== undefined &&
+      (categoriesField.options ?? []).some((option) => option.value === direction)
+    if (categoriesField !== undefined && optionExists) {
+      setValues((previous) => ({ ...previous, [CATEGORIES_FIELD_KEY]: [direction] }))
+    }
+
+    setSearchParams({}, { replace: true })
+  }, [fields, searchParams, setSearchParams])
 
   const visibleFields: FormField[] = []
   for (const field of fields ?? []) {

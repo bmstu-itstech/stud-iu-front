@@ -4,6 +4,8 @@ coverage
 playwright-report
 test-results
 blob-report
+allure-results
+allure-report
 .DS_Store
 *.local
 .env
