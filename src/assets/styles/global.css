@@ -22,6 +22,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
@@ -118,8 +119,8 @@ textarea {
 
 @media (max-width: 768px) {
   .home-section {
-    padding-top: 28px;
-    padding-bottom: 28px;
+    padding-top: 12px;
+    padding-bottom: 24px;
   }
 }
 
