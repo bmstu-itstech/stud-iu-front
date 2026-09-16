@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
+import styles from './layout.module.css'
 
 function ScrollManager() {
   const { pathname, hash } = useLocation()
@@ -23,13 +24,13 @@ function ScrollManager() {
 
 export function Layout() {
   return (
-    <>
+    <div className={styles.page}>
       <ScrollManager />
       <Navbar />
-      <main>
+      <main className={styles.main}>
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   )
 }

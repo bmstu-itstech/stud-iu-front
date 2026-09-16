@@ -51,6 +51,14 @@ export function Navbar() {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [menuOpen])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
+
   return (
     <header className={styles.header} data-test-id="navbar">
       <div className={`container ${styles.inner}`}>
