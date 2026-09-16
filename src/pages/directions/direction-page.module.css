@@ -1,0 +1,200 @@
+.page {
+  padding: 12px 0 64px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-muted);
+  transition: color 0.15s ease;
+}
+
+.back:hover {
+  color: var(--color-primary);
+}
+
+.layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding-top: 12px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tagline {
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.listItem {
+  position: relative;
+  padding-left: 20px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.listItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.cardsGrid {
+  display: grid;
+  gap: 12px;
+}
+
+.cols2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cols3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cols4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+
+.infoCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-card);
+}
+
+.infoCardName {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.infoCardText {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.aside {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 349px;
+}
+
+.joinCard {
+  position: sticky;
+  top: 102px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-card);
+}
+
+.joinTitle {
+  margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.joinRow {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 0;
+  border-bottom: 2px dashed var(--color-gray-light);
+}
+
+.joinLabel {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-muted);
+}
+
+.joinValue {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.joinNote {
+  padding: 12px;
+  font-size: 14px;
+  line-height: 20px;
+  background: var(--color-gray-light);
+  border-radius: 8px;
+}
+
+.link {
+  color: var(--color-primary);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .aside {
+    max-width: none;
+  }
+
+  .joinCard {
+    position: static;
+  }
+
+  .cols2,
+  .cols3,
+  .cols4 {
+    grid-template-columns: 1fr;
+  }
+}

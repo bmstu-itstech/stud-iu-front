@@ -1,5 +1,6 @@
 import { AboutSection } from './sections/AboutSection'
 import { ContactsSection } from './sections/ContactsSection'
+import { DirectionsSection } from './sections/DirectionsSection'
 import { NewsSection } from './sections/NewsSection'
 import { PartnersSection } from './sections/PartnersSection'
 import { PastEventsSection } from './sections/PastEventsSection'
@@ -9,6 +10,7 @@ export function HomePage() {
   return (
     <>
       <AboutSection />
+      <DirectionsSection />
       <UpcomingEventsSection />
       <NewsSection />
       <PastEventsSection />

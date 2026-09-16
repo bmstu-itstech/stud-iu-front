@@ -1,0 +1,41 @@
+.subtitle {
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 10px;
+}
+
+@media (min-width: 769px) {
+  .subtitle {
+    text-align: center;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 16px;
+}
+
+@media (min-width: 769px) {
+  .tags {
+    justify-content: center;
+  }
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 20px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  background: var(--color-gray-light);
+  border-radius: 999px;
+  transition: color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tag:hover {
+  color: var(--color-primary);
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
