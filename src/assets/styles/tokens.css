@@ -37,4 +37,6 @@
   --content-width: 1440px;
   --page-padding: 12px;
   --breakpoint-mobile: 768px;
+  
+  --header-height: 90px;
 }
