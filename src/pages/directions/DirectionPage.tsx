@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 
+import { NotFoundState } from '@/components/not-found/NotFoundState'
 import { ArrowLeftIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button/Button'
 import { getDirectionBySlug, type DirectionBlock } from '@/config/directions'
@@ -61,18 +62,11 @@ export function DirectionPage() {
 
   if (direction === undefined) {
     return (
-      <div className={styles.page}>
-        <div className="container">
-          <h1 className="text-title">Направление не найдено</h1>
-          <p className={styles.text}>
-            Вернись{' '}
-            <Link to="/" className={styles.link} data-test-id="back-home-link">
-              на главную
-            </Link>
-            .
-          </p>
-        </div>
-      </div>
+      <NotFoundState
+        testId="direction-not-found"
+        title="Направление не найдено"
+        description="Проверь адрес или загляни на главную — там есть список всех направлений."
+      />
     )
   }
 

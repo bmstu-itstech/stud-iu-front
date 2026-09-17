@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { ArrowLeftIcon } from '@/components/icons'
+import { NotFoundState } from '@/components/not-found/NotFoundState'
 import { Button } from '@/components/ui/button/Button'
 import { GalleryLightbox } from '@/components/event/GalleryLightbox'
 import { FaqList } from '@/components/event/FaqList'
@@ -41,17 +42,11 @@ export function EventPage() {
 
   if (event === undefined) {
     return (
-      <div className={styles.page}>
-        <div className="container">
-          <h1 className="text-title">Мероприятие не найдено</h1>
-          <p className={styles.description}>
-            Возможно, оно ещё не опубликовано или уже прошло.{' '}
-            <Link to="/" className={styles.link} data-test-id="back-home-link">
-              На главную
-            </Link>
-          </p>
-        </div>
-      </div>
+      <NotFoundState
+        testId="event-not-found"
+        title="Мероприятие не найдено"
+        description="Возможно, оно ещё не опубликовано или уже прошло."
+      />
     )
   }
 

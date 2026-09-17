@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { ArrowLeftIcon } from '@/components/icons'
+import { NotFoundState } from '@/components/not-found/NotFoundState'
 import { stores } from '@/stores'
 import { observer } from 'mobx-react-lite'
 import { formatLongDate } from '@/utils/format-date'
@@ -31,20 +32,11 @@ export const NewsPage = observer(function NewsPage() {
 
   if (!item) {
     return (
-      <div className={styles.page}>
-        <div className="container">
-          <div className={styles.article}>
-            <h1 className={styles.title}>Новость не найдена</h1>
-            <p className={styles.date}>
-              Возможно, она ещё не опубликована.{' '}
-              <Link to="/" className={styles.back} data-test-id="news-not-found-link">
-                На главную
-              </Link>
-            </p>
-            <span className="sr-only" data-test-id="news-not-found" />
-          </div>
-        </div>
-      </div>
+      <NotFoundState
+        testId="news-not-found"
+        title="Новость не найдена"
+        description="Возможно, она ещё не опубликована."
+      />
     )
   }
 

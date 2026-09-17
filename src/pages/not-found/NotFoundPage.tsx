@@ -1,17 +1,11 @@
-import { Link } from 'react-router-dom'
-
-import styles from './not-found-page.module.css'
+import { NotFoundState } from '@/components/not-found/NotFoundState'
 
 export function NotFoundPage() {
   return (
-    <div className={styles.page} data-test-id="not-found-page">
-      <h1 className="text-title">Страница не найдена</h1>
-      <p>
-        Кажется, такой страницы у нас нет.{' '}
-        <Link to="/" className={styles.link} data-test-id="back-home-link">
-          На главную
-        </Link>
-      </p>
-    </div>
+    <NotFoundState
+      testId="not-found-page"
+      title="Страница не найдена"
+      description="Кажется, такой страницы у нас нет. Проверь адрес или вернись на главную."
+    />
   )
 }
