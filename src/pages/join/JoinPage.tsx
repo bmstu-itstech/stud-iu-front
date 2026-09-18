@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button/Button'
@@ -238,7 +238,10 @@ export const JoinPage = observer(function JoinPage() {
               label={
                 <>
                   Я даю согласие на обработку моих персональных данных в соответствии с Федеральным
-                  законом от 27.07.2006 №&nbsp;152-ФЗ «О&nbsp;персональных данных»
+                  законом от 27.07.2006 №&nbsp;152-ФЗ «О&nbsp;персональных данных» и принимаю{' '}
+                  <Link to="/privacy" className={styles.policyLink} data-test-id="privacy-policy-link">
+                    политику конфиденциальности и обработки персональных данных
+                  </Link>
                 </>
               }
               checked={consent}

@@ -7,6 +7,7 @@ import { JoinPage } from '@/pages/join/JoinPage'
 import { NewsPage } from '@/pages/news/NewsPage'
 import { NotFoundPage } from '@/pages/not-found/NotFoundPage'
 import { PastEventsPage } from '@/pages/past-events/PastEventsPage'
+import { PrivacyPage } from '@/pages/privacy/PrivacyPage'
 
 export function AppRoutes() {
   return (
@@ -18,6 +19,7 @@ export function AppRoutes() {
         <Route path="/events/:id" element={<EventPage />} />
         <Route path="/news/:id" element={<NewsPage />} />
         <Route path="/join" element={<JoinPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
