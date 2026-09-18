@@ -71,3 +71,11 @@
   justify-content: center;
   padding-top: 12px;
 }
+
+.policyLink {
+  color: var(--color-primary);
+}
+
+.policyLink:hover {
+  text-decoration: underline;
+}
