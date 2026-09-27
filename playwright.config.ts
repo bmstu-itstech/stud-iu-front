@@ -18,7 +18,7 @@ export default defineConfig({
     testIdAttribute: 'data-test-id',
   },
   webServer: {
-    command: 'bun run dev --port 5174 --strictPort',
+    command: 'bun run dev --mode e2e --port 5174 --strictPort',
     url: 'http://localhost:5174',
     reuseExistingServer: false,
     timeout: 60_000,

@@ -48,3 +48,5 @@ npm run typecheck    # tsc --noEmit
 ```
 
 e2e идут на моках.
+
+Фича-флаги лежат в `src/config/featureFlags.ts` (обычные true/false). В e2e-прогоне их значения переопределяются файлом `src/config/featureFlags.e2e.ts` — vite в режиме `--mode e2e` подменяет модуль алиасом (см. `vite.config.ts`).

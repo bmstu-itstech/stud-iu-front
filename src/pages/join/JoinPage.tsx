@@ -9,6 +9,7 @@ import { DateField } from '@/components/ui/date-field/DateField'
 import { MultiSelect } from '@/components/ui/multi-select/MultiSelect'
 import { TextField } from '@/components/ui/text-field/TextField'
 import { SuccessIcon } from '@/components/icons'
+import { FEATURE } from '@/config/featureFlags'
 import { stores } from '@/stores'
 import type { ApplicationPayload, FormField } from '@/types/domain'
 import styles from './join-page.module.css'
@@ -92,6 +93,7 @@ export const JoinPage = observer(function JoinPage() {
 
     const categoriesField = fields.find((field) => field.key === CATEGORIES_FIELD_KEY)
     const optionExists =
+      FEATURE.ENABLE_DIRECTIONS &&
       categoriesField !== undefined &&
       (categoriesField.options ?? []).some((option) => option.value === direction)
     if (categoriesField !== undefined && optionExists) {
