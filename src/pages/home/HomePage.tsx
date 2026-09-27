@@ -5,12 +5,13 @@ import { NewsSection } from './sections/NewsSection'
 import { PartnersSection } from './sections/PartnersSection'
 import { PastEventsSection } from './sections/PastEventsSection'
 import { UpcomingEventsSection } from './sections/UpcomingEventsSection'
+import { FEATURE } from '@/config/featureFlags'
 
 export function HomePage() {
   return (
     <>
       <AboutSection />
-      <DirectionsSection />
+      {FEATURE.ENABLE_DIRECTIONS && <DirectionsSection />}
       <UpcomingEventsSection />
       <NewsSection />
       <PastEventsSection />

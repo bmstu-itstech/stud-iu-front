@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from '@/components/layout/Layout'
+import { FEATURE } from '@/config/featureFlags'
 import { DirectionPage } from '@/pages/directions/DirectionPage'
 import { EventPage } from '@/pages/event/EventPage'
 import { HomePage } from '@/pages/home/HomePage'
@@ -14,7 +15,7 @@ export function AppRoutes() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/directions/:slug" element={<DirectionPage />} />
+        {FEATURE.ENABLE_DIRECTIONS && <Route path="/directions/:slug" element={<DirectionPage />} />}
         <Route path="/events/past" element={<PastEventsPage />} />
         <Route path="/events/:id" element={<EventPage />} />
         <Route path="/news/:id" element={<NewsPage />} />
