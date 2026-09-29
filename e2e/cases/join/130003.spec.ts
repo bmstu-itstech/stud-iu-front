@@ -18,7 +18,7 @@ test.describe('Анкета активиста', () => {
       await joinPage.checkErrorVisible('Заполните поле «ФИО»')
       await joinPage.checkErrorVisible('Заполните поле «Учебная группа»')
       await joinPage.checkErrorVisible('Заполните поле «Дата рождения»')
-      await joinPage.checkErrorVisible('Заполните поле «Ссылка на Telegram»')
+      await joinPage.checkErrorVisible('Заполните поле «Имя пользователя в Telegram»')
       await joinPage.checkErrorVisible('Заполните поле «Ссылка на профиль в VK»')
       await joinPage.checkErrorVisible('Выберите хотя бы один вариант')
       await joinPage.checkErrorVisible('Подтвердите согласие')
