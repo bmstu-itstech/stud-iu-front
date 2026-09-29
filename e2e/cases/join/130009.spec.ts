@@ -12,7 +12,7 @@ test.describe('Анкета активиста', () => {
 
     await test.step('Проверить плейсхолдеры из схемы', async () => {
       await joinPage.checkFieldPlaceholder('full_name', 'Иванов Иван Сергеевич')
-      await joinPage.checkFieldPlaceholder('telegram_url', 'https://t.me/durov')
+      await joinPage.checkFieldPlaceholder('telegram', '@username')
     })
   })
 })

@@ -15,7 +15,7 @@ test.describe('Анкета активиста', () => {
       await joinPage.checkFieldVisible('full_name')
       await joinPage.checkFieldVisible('group')
       await joinPage.checkFieldVisible('birth_date')
-      await joinPage.checkFieldVisible('telegram_url')
+      await joinPage.checkFieldVisible('telegram')
       await joinPage.checkFieldVisible('vk_url')
       await joinPage.checkFieldVisible('categories')
       await joinPage.checkConsentVisible()

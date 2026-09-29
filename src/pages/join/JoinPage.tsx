@@ -24,6 +24,7 @@ const DIRECTION_QUERY_KEY = 'direction'
 const CONSENT_ERROR = 'Подтвердите согласие на обработку персональных данных'
 const MULTI_REQUIRED_ERROR = 'Выберите хотя бы один вариант'
 const BAD_URL_ERROR = 'Некорректная ссылка'
+const BAD_VALUE_ERROR = 'Некорректное значение'
 const GENERIC_URL_PATTERN = '^https?://\\S+$'
 
 function validate(fields: FormField[], values: FormValues, consent: boolean): FieldErrors {
@@ -49,6 +50,13 @@ function validate(fields: FormField[], values: FormValues, consent: boolean): Fi
             ? `${BAD_URL_ERROR} — пример: ${field.placeholder}`
             : BAD_URL_ERROR
         schema = schema.refine((url) => url === '' || pattern.test(url), message)
+      } else if (field.pattern !== null) {
+        const pattern = new RegExp(field.pattern)
+        const message =
+          field.placeholder !== null
+            ? `${BAD_VALUE_ERROR} — пример: ${field.placeholder}`
+            : BAD_VALUE_ERROR
+        schema = schema.refine((value) => value === '' || pattern.test(value), message)
       }
       shape[field.key] = schema
       input[field.key] = typeof value === 'string' ? value : ''
