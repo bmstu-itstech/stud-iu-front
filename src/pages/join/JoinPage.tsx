@@ -51,7 +51,6 @@ function validate(fields: FormField[], values: FormValues, consent: boolean): Fi
             : BAD_URL_ERROR
         schema = schema.refine((url) => url === '' || pattern.test(url), message)
       } else if (field.pattern !== null) {
-        // Паттерн может прийти и для обычного текстового поля (например, ник в Telegram)
         const pattern = new RegExp(field.pattern)
         const message =
           field.placeholder !== null
