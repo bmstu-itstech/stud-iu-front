@@ -11,7 +11,8 @@ import { TextField } from '@/components/ui/text-field/TextField'
 import { SuccessIcon } from '@/components/icons'
 import { FEATURE } from '@/config/featureFlags'
 import { stores } from '@/stores'
-import type { ApplicationPayload, FormField } from '@/types/domain'
+import type { FormField } from '@/types/domain'
+import { buildApplicationPayload } from '@/utils/buildApplicationPayload'
 import styles from './join-page.module.css'
 
 type FieldValue = string | string[]
@@ -181,15 +182,7 @@ export const JoinPage = observer(function JoinPage() {
     }
     setErrors({})
 
-    const payload: ApplicationPayload = {}
-    for (const field of visibleFields) {
-      const value = values[field.key]
-      if (field.type === 'multiple_choice') {
-        payload[field.key] = Array.isArray(value) ? value : []
-      } else if (typeof value === 'string' && value.trim() !== '') {
-        payload[field.key] = value.trim()
-      }
-    }
+    const payload = buildApplicationPayload(visibleFields, values)
 
     const ok = await applications.submit(payload)
     if (ok) setSubmitted(true)
