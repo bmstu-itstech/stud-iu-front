@@ -13,6 +13,10 @@
   transition: color 0.15s ease;
 }
 
+.titleTruncated {
+  display: none;
+}
+
 .image {
   width: 100%;
   aspect-ratio: 700 / 360;
@@ -42,6 +46,16 @@
 .excerpt {
   font-size: 16px;
   line-height: 20px;
+}
+
+@media (min-width: 769px) {
+  .titleFull {
+    display: none;
+  }
+
+  .titleTruncated {
+    display: inline;
+  }
 }
 
 @media (max-width: 768px) {

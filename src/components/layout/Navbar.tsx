@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import closeIcon from '@/assets/icons/close.svg'
 import burgerIcon from '@/assets/icons/burger.svg'
 import externalLinkIcon from '@/assets/icons/external-link.svg'
 import { Button } from '@/components/ui/button/Button'
+import { cn } from '@/utils/cn'
 import { Logo } from './Logo'
 import styles from './navbar.module.css'
 
@@ -33,31 +34,46 @@ const MOBILE_MENU: MenuItem[] = [
 ]
 
 const CTA_TEST_ID = 'navbar-cta'
+const MENU_CLOSE_ANIMATION_MS = 200
+
+type MenuState = 'closed' | 'open' | 'closing'
 
 export function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuState, setMenuState] = useState<MenuState>('closed')
   const location = useLocation()
 
+  const closeMenuAnimated = useCallback(() => {
+    setMenuState((state) => (state === 'open' ? 'closing' : state))
+  }, [])
+
+  const closeMenuInstant = useCallback(() => setMenuState('closed'), [])
+
   useEffect(() => {
-    setMenuOpen(false)
+    if (menuState !== 'closing') return
+    const timer = window.setTimeout(() => setMenuState('closed'), MENU_CLOSE_ANIMATION_MS)
+    return () => window.clearTimeout(timer)
+  }, [menuState])
+
+  useEffect(() => {
+    setMenuState('closed')
   }, [location.pathname, location.hash])
 
   useEffect(() => {
-    if (!menuOpen) return
+    if (menuState === 'closed') return
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setMenuOpen(false)
+      if (event.key === 'Escape') setMenuState((state) => (state === 'open' ? 'closing' : state))
     }
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [menuOpen])
+  }, [menuState])
 
   useEffect(() => {
-    if (!menuOpen) return
+    if (menuState === 'closed') return
     document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = ''
     }
-  }, [menuOpen])
+  }, [menuState])
 
   return (
     <header className={styles.header} data-test-id="navbar">
@@ -82,16 +98,19 @@ export function Navbar() {
           type="button"
           className={styles.burger}
           aria-label="Открыть меню"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(true)}
+          aria-expanded={menuState === 'open'}
+          onClick={() => setMenuState('open')}
           data-test-id="navbar-burger"
         >
           <img src={burgerIcon} width={32} height={32} alt="" />
         </button>
       </div>
 
-      {menuOpen && (
-        <div className={styles.overlay} data-test-id="navbar-menu">
+      {menuState !== 'closed' && (
+        <div
+          className={cn(styles.overlay, menuState === 'closing' && styles.overlayClosing)}
+          data-test-id="navbar-menu"
+        >
           <div className={`container ${styles.overlayInner}`}>
             <div className={styles.overlayHeader}>
               <Logo testId="navbar-menu-logo" />
@@ -99,7 +118,7 @@ export function Navbar() {
                 type="button"
                 className={styles.closeButton}
                 aria-label="Закрыть меню"
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenuAnimated}
                 data-test-id="navbar-menu-close"
               >
                 <img src={closeIcon} width={32} height={32} alt="" />
@@ -107,13 +126,13 @@ export function Navbar() {
             </div>
 
             <ul className={styles.overlayMenu}>
-              {MOBILE_MENU.map((item) => (
-                <li key={item.to}>
+              {MOBILE_MENU.map((item, index) => (
+                <li key={item.to} style={{ animationDelay: `${index * 30}ms` }}>
                   <Link
                     to={item.to}
                     className={styles.overlayLink}
                     data-test-id={item.testId ?? 'navbar-menu-link'}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={closeMenuInstant}
                   >
                     <span>{item.label}</span>
                     {item.external && (

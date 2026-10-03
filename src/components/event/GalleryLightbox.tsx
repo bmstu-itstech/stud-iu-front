@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type TouchEvent } from 'react'
 
 import { ArrowLeftIcon, ArrowRightIcon, CloseIcon } from '@/components/icons'
+import { cn } from '@/utils/cn'
 import styles from './gallery-lightbox.module.css'
 
 interface GalleryLightboxProps {
@@ -14,11 +15,20 @@ export function GalleryLightbox({ images, initialIndex = 0, title, onClose }: Ga
   const [index, setIndex] = useState(() =>
     Math.min(Math.max(initialIndex, 0), Math.max(images.length - 1, 0)),
   )
+  const [closing, setClosing] = useState(false)
   const touchStart = useRef<{ x: number; y: number } | null>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   const multiple = images.length > 1
+
+  const close = useCallback(() => setClosing(true), [])
+
+  useEffect(() => {
+    if (!closing) return
+    const timer = window.setTimeout(onClose, 200)
+    return () => window.clearTimeout(timer)
+  }, [closing, onClose])
 
   const goPrev = useCallback(() => {
     setIndex((current) => (current - 1 + images.length) % images.length)
@@ -31,7 +41,7 @@ export function GalleryLightbox({ images, initialIndex = 0, title, onClose }: Ga
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose()
+        close()
         return
       }
       if (!multiple) return
@@ -41,7 +51,7 @@ export function GalleryLightbox({ images, initialIndex = 0, title, onClose }: Ga
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [goNext, goPrev, multiple, onClose])
+  }, [close, goNext, goPrev, multiple])
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
@@ -85,7 +95,7 @@ export function GalleryLightbox({ images, initialIndex = 0, title, onClose }: Ga
 
   return (
     <div
-      className={styles.overlay}
+      className={cn(styles.overlay, closing && styles.closing)}
       role="dialog"
       aria-modal="true"
       aria-label={title ? `Фотографии: ${title}` : 'Просмотр фотографий'}
@@ -93,7 +103,7 @@ export function GalleryLightbox({ images, initialIndex = 0, title, onClose }: Ga
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <div className={styles.backdrop} onClick={onClose} aria-hidden="true" />
+      <div className={styles.backdrop} onClick={close} aria-hidden="true" />
 
       <header className={styles.header}>
         {multiple && (
@@ -105,7 +115,7 @@ export function GalleryLightbox({ images, initialIndex = 0, title, onClose }: Ga
           type="button"
           ref={closeButtonRef}
           className={styles.closeButton}
-          onClick={onClose}
+          onClick={close}
           aria-label="Закрыть просмотр"
           data-test-id="gallery-lightbox-close"
         >
@@ -116,7 +126,7 @@ export function GalleryLightbox({ images, initialIndex = 0, title, onClose }: Ga
       <div
         className={styles.stage}
         onClick={(event) => {
-          if (event.target === event.currentTarget) onClose()
+          if (event.target === event.currentTarget) close()
         }}
         data-test-id="gallery-lightbox-stage"
       >
