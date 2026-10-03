@@ -207,6 +207,12 @@
   animation: zoomOut 0.2s ease forwards;
 }
 
+.overlay.closing .header,
+.overlay.closing .navButton,
+.overlay.closing .thumbs {
+  animation: fadeOut 0.2s ease forwards;
+}
+
 @media (max-width: 768px) {
   .header {
     padding: 8px 12px;
