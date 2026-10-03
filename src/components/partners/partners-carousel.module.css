@@ -8,7 +8,7 @@
   scroll-snap-type: x mandatory;
   scroll-padding-inline: 12px;
   margin: 0 -12px;
-  padding: 4px 12px;
+  padding: 4px 0;
   scrollbar-width: none;
 }
 
@@ -19,12 +19,21 @@
 .track {
   display: flex;
   gap: 12px;
-  justify-content: safe center;
+  width: max-content;
+  margin: 0 auto;
 }
 
 .item {
   flex: 0 0 auto;
   scroll-snap-align: start;
+}
+
+.item:first-child {
+  margin-left: 12px;
+}
+
+.item:last-child {
+  margin-right: 12px;
 }
 
 .card {
