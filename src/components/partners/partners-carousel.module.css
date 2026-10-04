@@ -72,16 +72,21 @@
   border-radius: 50%;
   background: rgba(36, 36, 36, 0.5);
   color: var(--color-white);
-  transition: background-color 0.15s ease, opacity 0.15s ease;
+  transition: background-color 0.15s ease;
+  animation: arrowIn 0.2s ease;
 }
 
-.arrow:hover:not(:disabled) {
+.arrow:hover {
   background: rgba(36, 36, 36, 0.7);
 }
 
-.arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
+@keyframes arrowIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .prev {

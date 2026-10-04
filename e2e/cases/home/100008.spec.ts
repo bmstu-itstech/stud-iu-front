@@ -19,10 +19,26 @@ test.describe('Главная страница', () => {
       await test.step('На мобильных стрелки скрыты', async () => {
         await home.partners.checkArrowsHidden()
       })
-    } else {
-      await test.step('На десктопе стрелки неактивны', async () => {
-        await home.partners.checkArrowsDisabled()
-      })
+      return
     }
+
+    await test.step('Сузить окно, чтобы карусель не помещалась и появились стрелки', async () => {
+      await page.setViewportSize({ width: 1024, height: 900 })
+    })
+
+    await test.step('В начале прокрутки стрелка «назад» скрыта, «вперёд» видна', async () => {
+      await home.partners.checkArrowsMissingAtEdges()
+    })
+
+    await test.step('Прокрутить карусель до конца стрелкой «вперёд»', async () => {
+      await home.partners.clickNextArrow()
+      await home.partners.checkArrowVisible('prev')
+      await home.partners.checkArrowMissing('next')
+    })
+
+    await test.step('Вернуться в начало стрелкой «назад»', async () => {
+      await home.partners.clickPrevArrow()
+      await home.partners.checkArrowsMissingAtEdges()
+    })
   })
 })

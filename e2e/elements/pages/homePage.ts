@@ -228,9 +228,25 @@ export class PartnersSection {
     await expect(this.arrow('next')).toBeHidden()
   }
 
-  async checkArrowsDisabled() {
-    await expect(this.arrow('prev')).toBeDisabled()
-    await expect(this.arrow('next')).toBeDisabled()
+  async checkArrowVisible(kind: 'prev' | 'next') {
+    await expect(this.arrow(kind)).toBeVisible()
+  }
+
+  async checkArrowMissing(kind: 'prev' | 'next') {
+    await expect(this.arrow(kind)).toHaveCount(0)
+  }
+
+  async checkArrowsMissingAtEdges() {
+    await this.checkArrowMissing('prev')
+    await this.checkArrowVisible('next')
+  }
+
+  async clickNextArrow() {
+    await this.arrow('next').click()
+  }
+
+  async clickPrevArrow() {
+    await this.arrow('prev').click()
   }
 }
 
