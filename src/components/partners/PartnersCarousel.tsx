@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { ArrowLeftIcon, ArrowRightIcon } from '@/components/icons'
 import type { Partner } from '@/types/domain'
@@ -14,16 +14,18 @@ export function PartnersCarousel({ partners }: PartnersCarouselProps) {
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(false)
 
-  function updateArrows(): void {
+  const updateArrows = useCallback((): void => {
     const element = viewportRef.current
     if (!element) return
     setCanPrev(element.scrollLeft > 4)
     setCanNext(element.scrollLeft < element.scrollWidth - element.clientWidth - 4)
-  }
+  }, [])
 
   useEffect(() => {
     updateArrows()
-  }, [partners.length])
+    window.addEventListener('resize', updateArrows)
+    return () => window.removeEventListener('resize', updateArrows)
+  }, [updateArrows, partners.length])
 
   function scrollByPage(direction: number): void {
     const element = viewportRef.current
@@ -57,26 +59,28 @@ export function PartnersCarousel({ partners }: PartnersCarouselProps) {
         </ul>
       </div>
 
-      <button
-        type="button"
-        className={cn(styles.arrow, styles.prev)}
-        aria-label="Предыдущие партнёры"
-        disabled={!canPrev}
-        onClick={() => scrollByPage(-1)}
-        data-test-id="partners-prev"
-      >
-        <ArrowLeftIcon size={20} />
-      </button>
-      <button
-        type="button"
-        className={cn(styles.arrow, styles.next)}
-        aria-label="Следующие партнёры"
-        disabled={!canNext}
-        onClick={() => scrollByPage(1)}
-        data-test-id="partners-next"
-      >
-        <ArrowRightIcon size={20} />
-      </button>
+      {canPrev && (
+        <button
+          type="button"
+          className={cn(styles.arrow, styles.prev)}
+          aria-label="Предыдущие партнёры"
+          onClick={() => scrollByPage(-1)}
+          data-test-id="partners-prev"
+        >
+          <ArrowLeftIcon size={20} />
+        </button>
+      )}
+      {canNext && (
+        <button
+          type="button"
+          className={cn(styles.arrow, styles.next)}
+          aria-label="Следующие партнёры"
+          onClick={() => scrollByPage(1)}
+          data-test-id="partners-next"
+        >
+          <ArrowRightIcon size={20} />
+        </button>
+      )}
     </div>
   )
 }
