@@ -5,7 +5,7 @@ import { formatDottedDate } from '@/utils/format-date'
 import { truncate } from '@/utils/truncate'
 import styles from './news-card.module.css'
 
-const MAX_TITLE_LENGTH = 32
+const MAX_TITLE_LENGTH = 38;
 
 interface NewsCardProps {
   item: NewsItem
