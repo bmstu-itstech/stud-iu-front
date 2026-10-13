@@ -49,6 +49,58 @@ export function CloseIcon({ size = 24, className }: IconProps) {
   )
 }
 
+export function MoreIcon({ size = 24, className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" {...base(size, className)}>
+      <circle cx="12" cy="5.5" r="1.6" fill="currentColor" />
+      <circle cx="12" cy="12" r="1.6" fill="currentColor" />
+      <circle cx="12" cy="18.5" r="1.6" fill="currentColor" />
+    </svg>
+  )
+}
+
+export function LinkIcon({ size = 20, className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" {...base(size, className)}>
+      <path
+        d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+export function DownloadIcon({ size = 20, className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" {...base(size, className)}>
+      <path
+        d="M20.5 15v3.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V15"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 export function PlusIcon({ size = 20, className }: IconProps) {
   return (
     <svg viewBox="0 0 20 20" {...base(size, className)}>
