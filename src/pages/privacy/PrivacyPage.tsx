@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom'
-
-import { ArrowLeftIcon } from '@/components/icons'
+import { BackLink } from '@/components/ui/back-link/BackLink'
 import styles from './privacy-page.module.css'
 
 const POLICY_SECTIONS: { title: string; blocks: (string[] | string)[] }[] = [
@@ -83,10 +81,7 @@ export function PrivacyPage() {
     <div className={styles.page} data-test-id="privacy-page">
       <div className="container">
         <article className={styles.article}>
-          <Link to="/" className={styles.back} data-test-id="privacy-back">
-            <ArrowLeftIcon size={20} />
-            На главную
-          </Link>
+          <BackLink fallbackTo="/" label="На главную" className={styles.back} testId="privacy-back" />
 
           <h1 className={styles.title} data-test-id="privacy-title">
             Политика конфиденциальности и обработки персональных данных

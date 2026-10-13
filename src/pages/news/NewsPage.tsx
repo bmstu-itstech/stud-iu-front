@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-import { ArrowLeftIcon } from '@/components/icons'
 import { NotFoundState } from '@/components/not-found/NotFoundState'
+import { BackLink } from '@/components/ui/back-link/BackLink'
 import { stores } from '@/stores'
 import { observer } from 'mobx-react-lite'
 import { formatLongDate } from '@/utils/format-date'
@@ -44,10 +44,7 @@ export const NewsPage = observer(function NewsPage() {
     <div className={styles.page} data-test-id="news-page">
       <div className="container">
         <article className={styles.article}>
-          <Link to="/#news" className={styles.back} data-test-id="news-back">
-            <ArrowLeftIcon size={20} />
-            Все новости
-          </Link>
+          <BackLink fallbackTo="/#news" label="Все новости" className={styles.back} testId="news-back" />
 
           <h1 className={styles.title} data-test-id="news-title">
             {item.title}

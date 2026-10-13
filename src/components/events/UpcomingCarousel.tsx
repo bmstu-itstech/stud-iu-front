@@ -18,8 +18,11 @@ function wrappedDistance(index: number, activeIndex: number, count: number): num
   return distance
 }
 
-function slotOffset(distance: number): number {
+function slotOffset(distance: number, count: number): number {
   const abs = Math.abs(distance)
+  if (count < 3) {
+    return Math.sign(distance) * 900
+  }
   if (abs <= 2) return SLOT_OFFSET[distance + 2]
   return Math.sign(distance) * (1304 + (abs - 2) * 492)
 }
@@ -72,7 +75,7 @@ export function UpcomingCarousel({ events }: UpcomingCarouselProps) {
             const absDistance = Math.abs(distance)
             const isActive = absDistance === 0
             const role = ROLE_BY_DISTANCE[Math.min(absDistance, 2)]
-            const isHidden = absDistance > 2
+            const isHidden = absDistance > 2 || (count < 3 && !isActive)
 
             return (
               <button
@@ -85,7 +88,7 @@ export function UpcomingCarousel({ events }: UpcomingCarouselProps) {
                   jumpIds.includes(event.id) && styles.noTransition,
                 )}
                 style={{
-                  transform: `translate(-50%, -50%) translateX(${slotOffset(distance)}px) scale(${slideScale(absDistance)})`,
+                  transform: `translate(-50%, -50%) translateX(${slotOffset(distance, count)}px) scale(${slideScale(absDistance)})`,
                 }}
                 onClick={() => (isActive ? navigate(`/events/${event.id}`) : goTo(index))}
                 aria-label={
