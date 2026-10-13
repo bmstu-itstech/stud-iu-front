@@ -11,6 +11,9 @@ const ROLE_BY_DISTANCE = ['far', 'near', 'active', 'near', 'far'] as const
 
 const SLOT_OFFSET = [-1304, -732, 0, 732, 1304]
 
+const OFFSCREEN_SLOTS = 2.5
+const OPACITY_TRANSITION = 'opacity 0.3s ease'
+
 function wrappedDistance(index: number, activeIndex: number, count: number): number {
   let distance = index - activeIndex
   if (distance > count / 2) distance -= count
@@ -28,6 +31,8 @@ function slideScale(absDistance: number): number {
   return absDistance >= 2 ? 0.6 : 1 - absDistance * 0.2
 }
 
+const SETTLE_MS = 500
+
 interface UpcomingCarouselProps {
   events: EventItem[]
 }
@@ -35,57 +40,94 @@ interface UpcomingCarouselProps {
 export function UpcomingCarousel({ events }: UpcomingCarouselProps) {
   const navigate = useNavigate()
   const [activeIndex, setActiveIndex] = useState(0)
+  const [positions, setPositions] = useState<number[]>([])
   const [jumpIds, setJumpIds] = useState<string[]>([])
-  const jumpTimeout = useRef<number | undefined>(undefined)
+  const positionsRef = useRef<number[]>([])
+  const activeIndexRef = useRef(0)
+  const settleTimeout = useRef<number | undefined>(undefined)
 
-  useEffect(() => () => window.clearTimeout(jumpTimeout.current), [])
+  useEffect(() => () => window.clearTimeout(settleTimeout.current), [])
 
   const count = events.length
 
+  useEffect(() => {
+    window.clearTimeout(settleTimeout.current)
+    const initial = events.map((_, i) => wrappedDistance(i, 0, count))
+    positionsRef.current = initial
+    activeIndexRef.current = 0
+    setPositions(initial)
+    setJumpIds([])
+    setActiveIndex(0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count])
+
   function goTo(index: number): void {
-    const jumping: string[] = []
-    for (let i = 0; i < count; i++) {
-      const prev = wrappedDistance(i, activeIndex, count)
-      const next = wrappedDistance(i, index, count)
-      if (prev !== next && Math.abs(prev) === 2 && Math.sign(prev) !== Math.sign(next)) {
-        jumping.push(events[i].id)
+    const prev = activeIndexRef.current
+    const delta = wrappedDistance(index, prev, count)
+    if (delta === 0) return
+
+    window.clearTimeout(settleTimeout.current)
+
+    const jumpedIds: string[] = []
+    const nextPositions = events.map((_, i) => {
+      const current = positionsRef.current[i] ?? wrappedDistance(i, prev, count)
+      const canonical = wrappedDistance(i, index, count)
+      let target: number
+      if (i === index) {
+        target = 0
+      } else {
+        const shift = current - canonical
+        const k = Math.abs(shift) * 2 === count ? 0 : Math.round(shift / count)
+        target = canonical + count * k
       }
-    }
-    if (jumping.length > 0) {
-      setJumpIds(jumping)
-      window.clearTimeout(jumpTimeout.current)
-      jumpTimeout.current = window.setTimeout(() => setJumpIds([]), 500)
-    }
+      if (Math.abs(target - current) > OFFSCREEN_SLOTS) {
+        jumpedIds.push(events[i].id)
+      }
+      return target
+    })
+
+    positionsRef.current = nextPositions
+    activeIndexRef.current = index
+    setPositions(nextPositions)
+    setJumpIds(jumpedIds)
     setActiveIndex(index)
+
+    settleTimeout.current = window.setTimeout(() => {
+      const settled = events.map((_, i) => wrappedDistance(i, index, count))
+      const movedIds: string[] = []
+      for (let i = 0; i < count; i++) {
+        if (positionsRef.current[i] !== settled[i]) movedIds.push(events[i].id)
+      }
+      positionsRef.current = settled
+      setPositions(settled)
+      setJumpIds(movedIds)
+    }, SETTLE_MS)
   }
 
   if (count === 0) return null
 
-  const shift = (delta: number) => goTo((activeIndex + delta + count) % count)
+  const shift = (delta: number) => goTo((activeIndexRef.current + delta + count) % count)
 
   return (
     <div className={styles.root} data-test-id="upcoming-carousel">
       <div className={styles.viewport}>
         <div className={styles.track}>
           {events.map((event, index) => {
-            const distance = wrappedDistance(index, activeIndex, count)
-            const absDistance = Math.abs(distance)
+            const position = positions[index] ?? wrappedDistance(index, activeIndexRef.current, count)
+            const absDistance = Math.abs(position)
             const isActive = absDistance === 0
             const role = ROLE_BY_DISTANCE[Math.min(absDistance, 2)]
             const isHidden = absDistance > 2
+            const isJumping = jumpIds.includes(event.id)
 
             return (
               <button
                 key={event.id}
                 type="button"
-                className={cn(
-                  styles.slide,
-                  styles[role],
-                  isHidden && styles.hidden,
-                  jumpIds.includes(event.id) && styles.noTransition,
-                )}
+                className={cn(styles.slide, styles[role], isHidden && styles.hidden)}
                 style={{
-                  transform: `translate(-50%, -50%) translateX(${slotOffset(distance)}px) scale(${slideScale(absDistance)})`,
+                  transform: `translate(-50%, -50%) translateX(${slotOffset(position)}px) scale(${slideScale(absDistance)})`,
+                  ...(isJumping && { transition: OPACITY_TRANSITION }),
                 }}
                 onClick={() => (isActive ? navigate(`/events/${event.id}`) : goTo(index))}
                 aria-label={
