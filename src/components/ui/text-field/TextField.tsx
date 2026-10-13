@@ -14,6 +14,7 @@ interface TextFieldProps {
   error?: string
   testId?: string
   className?: string
+  inputMode?: 'text' | 'tel' | 'numeric' | 'email' | 'url'
 }
 
 export function TextField({
@@ -27,6 +28,7 @@ export function TextField({
   error,
   testId,
   className,
+  inputMode,
 }: TextFieldProps) {
   const id = useId()
   const errorId = `${id}-error`
@@ -45,6 +47,7 @@ export function TextField({
         id={id}
         name={name}
         type={type}
+        inputMode={inputMode}
         className={cn(styles.input, error && styles.inputError)}
         value={value}
         placeholder={placeholder}

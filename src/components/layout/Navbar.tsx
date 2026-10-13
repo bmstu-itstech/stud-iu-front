@@ -18,8 +18,8 @@ interface MenuItem {
 
 const DESKTOP_MENU: MenuItem[] = [
   { label: 'О нас', to: '/#about' },
-  { label: 'Новости', to: '/#news' },
   { label: 'Мероприятия', to: '/#events' },
+  { label: 'Новости', to: '/#news' },
   { label: 'Контакты', to: '/#contacts' },
 ]
 

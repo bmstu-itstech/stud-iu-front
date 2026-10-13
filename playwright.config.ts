@@ -13,13 +13,13 @@ export default defineConfig({
       ]
     : [['list'], ['allure-playwright', { resultsDir: 'allure-results' }]],
   use: {
-    baseURL: 'http://localhost:5174',
+    baseURL: 'http://localhost:5180',
     trace: 'retain-on-failure',
     testIdAttribute: 'data-test-id',
   },
   webServer: {
-    command: 'bun run dev --mode e2e --port 5174 --strictPort',
-    url: 'http://localhost:5174',
+    command: 'bun run dev --mode e2e --port 5180 --strictPort',
+    url: 'http://localhost:5180',
     reuseExistingServer: false,
     timeout: 60_000,
     env: { ...process.env, VITE_ENABLE_MOCKS: 'true' },

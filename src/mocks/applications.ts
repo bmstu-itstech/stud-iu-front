@@ -30,6 +30,16 @@ export const applicationFormSchema = [
     depends_on: null,
   },
   {
+    key: 'phone',
+    label: 'Номер мобильного телефона',
+    type: 'text',
+    required: true,
+    placeholder: '+79991234567',
+    pattern: '^\\+7\\d{10}$',
+    options: null,
+    depends_on: null,
+  },
+  {
     key: 'telegram',
     label: 'Имя пользователя в Telegram',
     type: 'text',
