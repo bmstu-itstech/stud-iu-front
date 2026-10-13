@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { ArrowLeftIcon, ArrowRightIcon } from '@/components/icons'
@@ -18,11 +18,8 @@ function wrappedDistance(index: number, activeIndex: number, count: number): num
   return distance
 }
 
-function slotOffset(distance: number, count: number): number {
+function slotOffset(distance: number): number {
   const abs = Math.abs(distance)
-  if (count < 3) {
-    return Math.sign(distance) * 900
-  }
   if (abs <= 2) return SLOT_OFFSET[distance + 2]
   return Math.sign(distance) * (1304 + (abs - 2) * 492)
 }
@@ -38,28 +35,26 @@ interface UpcomingCarouselProps {
 export function UpcomingCarousel({ events }: UpcomingCarouselProps) {
   const navigate = useNavigate()
   const [activeIndex, setActiveIndex] = useState(0)
-  const [preJump, setPreJump] = useState<Record<string, number>>({})
+  const [jumpIds, setJumpIds] = useState<string[]>([])
+  const jumpTimeout = useRef<number | undefined>(undefined)
+
+  useEffect(() => () => window.clearTimeout(jumpTimeout.current), [])
 
   const count = events.length
 
   function goTo(index: number): void {
-    const direction = Math.sign(wrappedDistance(index, activeIndex, count)) || 1
-    const preJumpLocal: Record<string, number> = {}
-
+    const jumping: string[] = []
     for (let i = 0; i < count; i++) {
       const prev = wrappedDistance(i, activeIndex, count)
       const next = wrappedDistance(i, index, count)
-      if (prev === next) continue
-      if (Math.sign(prev) === Math.sign(next)) continue
-
-      preJumpLocal[events[i].id] = next === 0 ? direction * 732 : Math.sign(next) * 1304
+      if (prev !== next && Math.abs(prev) === 2 && Math.sign(prev) !== Math.sign(next)) {
+        jumping.push(events[i].id)
+      }
     }
-
-    if (Object.keys(preJumpLocal).length > 0) {
-      setPreJump(preJumpLocal)
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setPreJump({}))
-      })
+    if (jumping.length > 0) {
+      setJumpIds(jumping)
+      window.clearTimeout(jumpTimeout.current)
+      jumpTimeout.current = window.setTimeout(() => setJumpIds([]), 500)
     }
     setActiveIndex(index)
   }
@@ -77,8 +72,7 @@ export function UpcomingCarousel({ events }: UpcomingCarouselProps) {
             const absDistance = Math.abs(distance)
             const isActive = absDistance === 0
             const role = ROLE_BY_DISTANCE[Math.min(absDistance, 2)]
-            const isHidden = absDistance > 2 || (count < 3 && !isActive)
-            const preJumpOffset = preJump[event.id]
+            const isHidden = absDistance > 2
 
             return (
               <button
@@ -88,10 +82,10 @@ export function UpcomingCarousel({ events }: UpcomingCarouselProps) {
                   styles.slide,
                   styles[role],
                   isHidden && styles.hidden,
-                  preJumpOffset !== undefined && styles.noTransition,
+                  jumpIds.includes(event.id) && styles.noTransition,
                 )}
                 style={{
-                  transform: `translate(-50%, -50%) translateX(${preJumpOffset ?? slotOffset(distance, count)}px) scale(${slideScale(absDistance)})`,
+                  transform: `translate(-50%, -50%) translateX(${slotOffset(distance)}px) scale(${slideScale(absDistance)})`,
                 }}
                 onClick={() => (isActive ? navigate(`/events/${event.id}`) : goTo(index))}
                 aria-label={
