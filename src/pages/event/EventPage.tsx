@@ -119,6 +119,30 @@ export function EventPage() {
               </section>
             )}
 
+            {event.status !== 'far' && event.gallery && event.gallery.length > 0 && (
+              <section className={styles.block} data-test-id="event-gallery">
+                <div className={styles.gallery}>
+                  {event.gallery.map((image, index) => (
+                    <button
+                      key={`${event.id}-gallery-${index}`}
+                      type="button"
+                      className={styles.galleryItem}
+                      onClick={() => setLightboxIndex(index)}
+                      aria-label={`Фото ${index + 1} — открыть просмотр`}
+                      data-test-id="gallery-image"
+                    >
+                      <img
+                        src={image}
+                        alt={`Фото ${index + 1}`}
+                        className={styles.galleryImage}
+                        loading="lazy"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </section>
+            )}
+
             {event.status === 'far' && event.gallery && event.gallery.length > 0 && (
               <section className={styles.block} data-test-id="event-gallery">
                 <h2 className="text-subtitle">Как это было</h2>

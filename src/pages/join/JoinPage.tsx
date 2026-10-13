@@ -13,6 +13,7 @@ import { FEATURE } from '@/config/featureFlags'
 import { stores } from '@/stores'
 import type { FormField } from '@/types/domain'
 import { buildApplicationPayload } from '@/utils/buildApplicationPayload'
+import { formatPhone, normalizePhone } from '@/utils/phone-mask'
 import styles from './join-page.module.css'
 
 type FieldValue = string | string[]
@@ -22,6 +23,7 @@ type FieldErrors = Record<string, string | undefined>
 const CONSENT_KEY = 'consent'
 const CATEGORIES_FIELD_KEY = 'categories'
 const DIRECTION_QUERY_KEY = 'direction'
+const PHONE_FIELD_KEY = 'phone'
 const CONSENT_ERROR = 'Подтвердите согласие на обработку персональных данных'
 const MULTI_REQUIRED_ERROR = 'Выберите хотя бы один вариант'
 const BAD_URL_ERROR = 'Некорректная ссылка'
@@ -57,7 +59,14 @@ function validate(fields: FormField[], values: FormValues, consent: boolean): Fi
           field.placeholder !== null
             ? `${BAD_VALUE_ERROR} — пример: ${field.placeholder}`
             : BAD_VALUE_ERROR
-        schema = schema.refine((value) => value === '' || pattern.test(value), message)
+        const normalized =
+          field.key === PHONE_FIELD_KEY
+            ? normalizePhone(String(value))
+            : String(value)
+        schema = schema.refine(
+          (val) => val === '' || pattern.test(normalized),
+          message,
+        )
       }
       shape[field.key] = schema
       input[field.key] = typeof value === 'string' ? value : ''
@@ -157,20 +166,25 @@ export const JoinPage = observer(function JoinPage() {
             testId={testId}
           />
         )
-      default:
+      case 'text':
+      case 'url': {
+        const isPhone = field.key === PHONE_FIELD_KEY
         return (
           <TextField
             key={field.key}
             label={field.label}
-            required={field.required}
             type={field.type === 'url' ? 'url' : 'text'}
             placeholder={field.placeholder ?? undefined}
             value={typeof value === 'string' ? value : ''}
-            onChange={(next) => setField(field.key, next)}
+            onChange={(next) =>
+              setField(field.key, isPhone ? formatPhone(next) : next)
+            }
+            inputMode={isPhone ? 'tel' : undefined}
             error={errors[field.key]}
             testId={testId}
           />
         )
+      }
     }
   }
 

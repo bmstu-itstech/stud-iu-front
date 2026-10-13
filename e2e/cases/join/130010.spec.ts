@@ -10,6 +10,7 @@ test.describe('Анкета активиста', () => {
       await joinPage.open()
       await joinPage.fillField('full_name', 'Иванов Иван Сергеевич')
       await joinPage.fillField('group', 'ИУ6-42Б')
+      await joinPage.fillField('phone', '+7(925)553-24-01')
       await joinPage.fillField('telegram', '@ivanov')
       await joinPage.fillField('vk_url', 'https://vk.com/ivanov')
     })

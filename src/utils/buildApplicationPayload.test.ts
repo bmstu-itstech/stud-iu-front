@@ -33,6 +33,15 @@ describe('buildApplicationPayload', () => {
     expect(payload.telegram).toBe('ivanov')
   })
 
+  test('телефон уходит на сервер без маски', () => {
+    const payload = buildApplicationPayload(
+      [field({ key: 'phone' })],
+      { phone: '+7(925)553-24-01' },
+    )
+
+    expect(payload.phone).toBe('+79255532401')
+  })
+
   test('строковые значения обрезаются, пустые не попадают в payload', () => {
     const payload = buildApplicationPayload(
       [field({ key: 'full_name' }), field({ key: 'github_url' })],

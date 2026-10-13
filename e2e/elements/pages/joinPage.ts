@@ -50,6 +50,10 @@ export class JoinPage {
     await this.field(key).fill(value)
   }
 
+  async checkFieldValue(key: string, value: string) {
+    await expect(this.field(key)).toHaveValue(value)
+  }
+
   async checkFieldPlaceholder(key: string, placeholder: string) {
     await expect(this.field(key)).toHaveAttribute('placeholder', placeholder)
   }
