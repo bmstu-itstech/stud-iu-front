@@ -361,12 +361,10 @@
   }
 
   .menuWrap {
-    right: 12px;
-    bottom: 12px;
-  }
-
-  .menuWrapRaised {
-    bottom: 70px;
+    top: 8px;
+    left: 12px;
+    right: auto;
+    bottom: auto;
   }
 
   .moreButton {
@@ -375,7 +373,11 @@
   }
 
   .menu {
-    min-width: 192px;
+    top: calc(100% + 8px);
+    right: auto;
+    bottom: auto;
+    left: 0;
+    min-width: 224px;
   }
 
   .thumbs {
