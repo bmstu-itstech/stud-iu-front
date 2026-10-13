@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-import { ArrowLeftIcon } from '@/components/icons'
+import { BackLink } from '@/components/ui/back-link/BackLink'
 import { NotFoundState } from '@/components/not-found/NotFoundState'
 import { Button } from '@/components/ui/button/Button'
 import { GalleryLightbox } from '@/components/event/GalleryLightbox'
@@ -94,10 +94,7 @@ export function EventPage() {
   return (
     <div className={styles.page} data-test-id="event-page">
       <div className="container">
-        <Link to="/" className={styles.back} data-test-id="event-back">
-          <ArrowLeftIcon size={20} />
-          Назад
-        </Link>
+        <BackLink fallbackTo="/" label="Назад" className={styles.back} testId="event-back" />
 
         <div className={styles.layout}>
           <div className={styles.main}>

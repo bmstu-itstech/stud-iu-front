@@ -1,7 +1,7 @@
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
+import { BackLink } from '@/components/ui/back-link/BackLink'
 import { NotFoundState } from '@/components/not-found/NotFoundState'
-import { ArrowLeftIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button/Button'
 import { getDirectionBySlug, type DirectionBlock } from '@/config/directions'
 import styles from './direction-page.module.css'
@@ -73,10 +73,7 @@ export function DirectionPage() {
   return (
     <div className={styles.page} data-test-id="direction-page">
       <div className="container">
-        <Link to="/" className={styles.back} data-test-id="direction-back">
-          <ArrowLeftIcon size={20} />
-          Назад
-        </Link>
+        <BackLink fallbackTo="/" label="Назад" className={styles.back} testId="direction-back" />
 
         <div className={styles.layout}>
           <div className={styles.main}>

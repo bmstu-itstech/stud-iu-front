@@ -1,0 +1,16 @@
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-muted);
+  transition: color 0.15s ease;
+}
+
+.back:hover {
+  color: var(--color-primary);
+}
