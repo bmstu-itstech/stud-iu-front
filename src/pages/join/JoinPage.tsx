@@ -180,6 +180,7 @@ export const JoinPage = observer(function JoinPage() {
               setField(field.key, isPhone ? formatPhone(next) : next)
             }
             inputMode={isPhone ? 'tel' : undefined}
+            required={field.required}
             error={errors[field.key]}
             testId={testId}
           />
