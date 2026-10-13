@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from '@playwright/test'
+import { expect, type Download, type Locator, type Page } from '@playwright/test'
 
 export class RegistrationCard {
   readonly root: Locator
@@ -155,6 +155,75 @@ export class EventGallery {
 
   async clickStageCorner() {
     await this.lightboxElement('stage').click({ position: { x: 2, y: 2 } })
+  }
+
+  get moreButton(): Locator {
+    return this.lightboxElement('more')
+  }
+
+  get menu(): Locator {
+    return this.lightboxElement('menu')
+  }
+
+  get copyLinkButton(): Locator {
+    return this.lightboxElement('copy-link')
+  }
+
+  get saveButton(): Locator {
+    return this.lightboxElement('save')
+  }
+
+  get toast(): Locator {
+    return this.lightboxElement('toast')
+  }
+
+  async checkMoreButtonVisible() {
+    await expect(this.moreButton).toBeVisible()
+  }
+
+  async openMenu() {
+    await this.moreButton.click()
+  }
+
+  async checkMenuVisible() {
+    await expect(this.menu).toBeVisible()
+  }
+
+  async checkMenuHidden() {
+    await expect(this.menu).toHaveCount(0)
+  }
+
+  async checkMenuItemsVisible() {
+    await expect(this.copyLinkButton).toBeVisible()
+    await expect(this.saveButton).toBeVisible()
+  }
+
+  async clickCopyLink() {
+    await this.copyLinkButton.click()
+  }
+
+  async clickLightboxImage() {
+    await this.lightboxElement('image').click()
+  }
+
+  async downloadPhoto(): Promise<Download> {
+    const downloadPromise = this.page.waitForEvent('download')
+    await this.saveButton.click()
+    return downloadPromise
+  }
+
+  async checkToastText(text: string) {
+    await expect(this.toast).toHaveText(text)
+  }
+
+  async getLightboxImageSrc(): Promise<string> {
+    const src = await this.lightboxElement('image').getAttribute('src')
+    if (src === null) throw new Error('У изображения лайтбокса нет атрибута src')
+    return src
+  }
+
+  async readClipboardText(): Promise<string> {
+    return this.page.evaluate(() => navigator.clipboard.readText())
   }
 }
 

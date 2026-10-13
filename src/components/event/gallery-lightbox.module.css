@@ -104,6 +104,91 @@
   right: 12px;
 }
 
+.menuWrap {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2;
+}
+
+.moreButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.moreButton:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  min-width: 208px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: var(--color-dark);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  animation: menuIn 0.15s ease;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  color: var(--color-white);
+  background: none;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.menuItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.menuClosing {
+  animation: menuOut 0.15s ease forwards;
+  pointer-events: none;
+}
+
+.toast {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  z-index: 3;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--color-dark);
+  font-size: 13px;
+  line-height: 16px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: toastIn 0.2s ease;
+}
+
+.toastClosing {
+  animation: toastOut 0.2s ease forwards;
+}
+
 .thumbs {
   position: relative;
   z-index: 1;
@@ -154,6 +239,8 @@
 
 .closeButton:focus-visible,
 .navButton:focus-visible,
+.moreButton:focus-visible,
+.menuItem:focus-visible,
 .thumb:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
@@ -188,6 +275,50 @@
   }
 }
 
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menuOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(6px);
+  }
+}
+
 @keyframes zoomOut {
   from {
     opacity: 1;
@@ -209,6 +340,8 @@
 
 .overlay.closing .header,
 .overlay.closing .navButton,
+.overlay.closing .menuWrap,
+.overlay.closing .toast,
 .overlay.closing .thumbs {
   animation: fadeOut 0.2s ease forwards;
 }
@@ -225,6 +358,20 @@
   .navButton {
     width: 40px;
     height: 40px;
+  }
+
+  .menuWrap {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .moreButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .menu {
+    min-width: 192px;
   }
 
   .thumbs {
