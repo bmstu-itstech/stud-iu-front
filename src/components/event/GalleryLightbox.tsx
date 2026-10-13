@@ -318,52 +318,6 @@ export function GalleryLightbox({ images, initialIndex = 0, title, onClose }: Ga
           </button>
         )}
 
-        <div className={styles.menuWrap}>
-          <button
-            type="button"
-            ref={moreButtonRef}
-            className={styles.moreButton}
-            onClick={menuPhase === 'open' ? closeMenu : openMenu}
-            aria-label="Действия с фотографией"
-            aria-haspopup="menu"
-            aria-expanded={menuPhase === 'open'}
-            data-test-id="gallery-lightbox-more"
-          >
-            <MoreIcon size={22} />
-          </button>
-
-          {menuPhase !== 'closed' && (
-            <div
-              ref={menuRef}
-              className={cn(styles.menu, menuPhase === 'closing' && styles.menuClosing)}
-              role="menu"
-              aria-label="Действия с фотографией"
-              data-test-id="gallery-lightbox-menu"
-            >
-              <button
-                type="button"
-                role="menuitem"
-                className={styles.menuItem}
-                onClick={() => void copyLink()}
-                data-test-id="gallery-lightbox-copy-link"
-              >
-                <LinkIcon size={18} />
-                <span>Скопировать ссылку</span>
-              </button>
-              <button
-                type="button"
-                role="menuitem"
-                className={styles.menuItem}
-                onClick={() => void saveImage()}
-                data-test-id="gallery-lightbox-save"
-              >
-                <DownloadIcon size={18} />
-                <span>Сохранить</span>
-              </button>
-            </div>
-          )}
-        </div>
-
         {toast !== null && (
           <div
             className={cn(styles.toast, toastClosing && styles.toastClosing)}
@@ -371,6 +325,52 @@ export function GalleryLightbox({ images, initialIndex = 0, title, onClose }: Ga
             data-test-id="gallery-lightbox-toast"
           >
             {toast}
+          </div>
+        )}
+      </div>
+
+      <div className={cn(styles.menuWrap, multiple && styles.menuWrapRaised)}>
+        <button
+          type="button"
+          ref={moreButtonRef}
+          className={styles.moreButton}
+          onClick={menuPhase === 'open' ? closeMenu : openMenu}
+          aria-label="Действия с фотографией"
+          aria-haspopup="menu"
+          aria-expanded={menuPhase === 'open'}
+          data-test-id="gallery-lightbox-more"
+        >
+          <MoreIcon size={22} />
+        </button>
+
+        {menuPhase !== 'closed' && (
+          <div
+            ref={menuRef}
+            className={cn(styles.menu, menuPhase === 'closing' && styles.menuClosing)}
+            role="menu"
+            aria-label="Действия с фотографией"
+            data-test-id="gallery-lightbox-menu"
+          >
+            <button
+              type="button"
+              role="menuitem"
+              className={styles.menuItem}
+              onClick={() => void copyLink()}
+              data-test-id="gallery-lightbox-copy-link"
+            >
+              <LinkIcon size={18} />
+              <span>Скопировать ссылку</span>
+            </button>
+            <button
+              type="button"
+              role="menuitem"
+              className={styles.menuItem}
+              onClick={() => void saveImage()}
+              data-test-id="gallery-lightbox-save"
+            >
+              <DownloadIcon size={18} />
+              <span>Сохранить</span>
+            </button>
           </div>
         )}
       </div>

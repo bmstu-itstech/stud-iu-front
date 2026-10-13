@@ -365,6 +365,10 @@
     bottom: 12px;
   }
 
+  .menuWrapRaised {
+    bottom: 70px;
+  }
+
   .moreButton {
     width: 40px;
     height: 40px;
